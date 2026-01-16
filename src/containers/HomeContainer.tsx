@@ -2,14 +2,30 @@
 
 import React from 'react'
 import { Header } from '@/components/Header'
+import { Hero } from '@/components/Hero'
 import ContactForm from '@/components/ContactForm'
 import Image from 'next/image'
 
 export default function HomeContainer() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
+    <div className="flex min-h-screen flex-col bg-zinc-50 font-sans dark:bg-black">
       <Header />
-      <main className="flex min-h-screen w-full max-w-5xl flex-col items-center justify-between py-24 px-6 bg-white dark:bg-black sm:items-start">
+      <Hero
+        imageSrc="/images/hero_image.jpeg"
+        imageAlt="Hero Image"
+        title={
+          <>
+            Друзі, привіт!
+            <br />
+            Це я, Пані Юля!
+          </>
+        }
+        description="Я допомагаю дітям пізнавати світ через відео, пісні ті гру, а батькам - бути спокійними за контент, який вони вмикають. Тут все створено з турботою і теплом."
+        buttonText="Дізнатися більше"
+        buttonLink="/about"
+        imagePosition="left"
+      />
+      <main className="flex min-h-screen w-full flex-col items-center justify-between py-24 px-6 sm:items-start" style={{ backgroundColor: "var(--secondary)" }}>
         <div className="w-full flex flex-col md:flex-row items-start gap-8">
           <div className="w-full md:w-1/2">
             <ContactForm />

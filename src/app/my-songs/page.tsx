@@ -1,3 +1,5 @@
+import { Header } from '@/components/Header';
+
 export const metadata = {
   title: 'Мої пісні',
 }
@@ -10,8 +12,10 @@ export default function MySongsPage() {
   ]
 
   return (
-    <section className="min-h-screen py-24 px-6">
-      <div className="max-w-3xl mx-auto">
+    <>
+      <Header />
+      <section className="min-h-screen py-24 px-6 pt-16">
+      <div className="w-full">
         <h1 className="text-3xl font-bold mb-6">Мої пісні</h1>
         <ul className="space-y-4">
           {songs.map((s) => (
@@ -23,5 +27,6 @@ export default function MySongsPage() {
         </ul>
       </div>
     </section>
+    </>
   )
 }
