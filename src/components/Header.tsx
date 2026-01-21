@@ -17,21 +17,21 @@ export const Header = () => {
 
   return (
     <header className="w-full shadow-md fixed top-0 left-0 z-50" style={{ backgroundColor: "var(--secondary)" }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-20">
         <div className="flex justify-between items-center h-16">
-          <div className="flex-shrink-0 flex items-center justify-center">
+          <div className="flex-shrink-0 flex items-center justify-center mt-2">
             <Link href="/">
               <Image
                 src="/images/logo.png"
                 alt="Pani Yulya Shop"
-                width={120}
-                height={50}
+                width={150}
+                height={10}
                 className="h-auto w-auto cursor-pointer"
               />
             </Link>
           </div>
 
-          <nav className="hidden md:flex space-x-6">
+          <nav className="hidden md:flex space-x-12">
             {navLinks.map((link) => (
               <Link key={link.name} href={link.href} className="font-bold">
                   {link.name}

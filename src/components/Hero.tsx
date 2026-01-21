@@ -8,7 +8,7 @@ interface HeroProps {
   imageSrc: string;
   imageAlt: string;
   title: ReactNode;
-  description: string;
+  description: ReactNode;
   buttonText?: string;
   buttonLink?: string;
   imagePosition?: "left" | "right";
@@ -19,8 +19,8 @@ export const Hero = ({
   imageAlt,
   title,
   description,
-  buttonText,
-  buttonLink,
+/*   buttonText,
+  buttonLink, */
   imagePosition = "left",
 }: HeroProps) => {
   const imageContent = (
@@ -37,13 +37,13 @@ export const Hero = ({
 
   const textContent = (
     <div className="w-full md:w-1/2 flex flex-col justify-center px-6 md:px-12">
-      <h1 className="text-4xl md:text-5xl font-bold mb-6 whitespace-pre-line" style={{ color: "var(--foreground)" }}>
+      <h1 className="text-5xl md:text-7xl font-bold mb-15 whitespace-pre-line" style={{ color: "var(--foreground)" }}>
         {title}
       </h1>
-      <p className="text-lg text-(--foreground) mb-8 leading-relaxed font-semibold">
+      <p className="text-2xl text-(--foreground) mb-8 leading-relaxed font-semibold">
         {description}
       </p>
-      {buttonText && buttonLink && (
+{/*       {buttonText && buttonLink && (
         <div>
           <Link
             href={buttonLink}
@@ -52,23 +52,25 @@ export const Hero = ({
             {buttonText}
           </Link>
         </div>
-      )}
+      )} */}
     </div>
   );
 
   return (
-    <div className="flex flex-col md:flex-row w-full items-center py-[30px]" style={{ backgroundColor: "var(--primary)" }}>
-      {imagePosition === "left" ? (
-        <>
-          {imageContent}
-          {textContent}
-        </>
-      ) : (
-        <>
-          {textContent}
-          {imageContent}
-        </>
-      )}
+    <div className="w-full" style={{ backgroundColor: "var(--primary)" }}>
+      <div className="max-w-8xl mx-auto flex flex-col md:flex-row items-center px-[30px] py-[40px]"> 
+        {imagePosition === "left" ? (
+          <>
+            {imageContent}
+            {textContent}
+          </>
+        ) : (
+          <>
+            {textContent}
+            {imageContent}
+          </>
+        )}
+      </div>
     </div>
   );
 };
