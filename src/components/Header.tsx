@@ -3,7 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { MinusIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+
 
 const navLinks = [
   { name: "Головна", href: "/" },
@@ -47,7 +48,7 @@ export const Header = () => {
               {isOpen ? (
                 <XMarkIcon className="h-6 w-6" />
               ) : (
-                <MinusIcon className="h-6 w-6" />
+                <Bars3Icon className="h-6 w-6" />
               )}
             </button>
           </div>
