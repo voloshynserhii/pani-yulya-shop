@@ -14,7 +14,7 @@ const ProtectedAudioPlayer = forwardRef<
   return (
     <audio
       ref={ref}
-      src={`/api/audio/${trackId}.wav`}
+      src={`/api/audio/${trackId}.mp3`}
       preload="none"
       onEnded={onEnded}
     />
