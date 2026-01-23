@@ -33,7 +33,7 @@ export async function requestLoginCode(prevState: any, formData: FormData) {
 
   try {
     await resend.emails.send({
-      from: 'Pani Yulya Shop <onboarding@resend.dev>',
+      from: 'Pani Yulya <noreply@pani-yulya.kids>',
       to: email,
       subject: 'Ваш код входу',
       html: `<p>Ваш код для входу: <strong>${code}</strong></p>`,

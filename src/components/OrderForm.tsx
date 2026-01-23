@@ -6,12 +6,16 @@ import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui";
 import { Input } from "@/components/ui";
 import { Label } from "@/components/ui";
+import { createWayForPayInvoice } from "@/app/actions";
+import { sendOrder } from "@/app/actions";
 
 type FormData = {
   childName: string;
   childNameCute: string;
   age: number;
+  birthday: string;
   telegram: string;
+  email: string;
   notes?: string;
 };
 
@@ -20,25 +24,43 @@ export default function VideoGreetingForm() {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    reset,
   } = useForm<FormData>({
     defaultValues: {
       childName: "",
       childNameCute: "",
       age: undefined,
+      birthday: "",
       telegram: "",
-      notes: "",
+      email: ""
     },
   });
 
   const onSubmit = async (data: FormData) => {
-    console.log("Form submitted:", data);
+    try {
+      const orderReference = `ORDER_VIDEO_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
+      const orderDate = Math.floor(Date.now() / 1000);
+      const merchantDomainName = window.location.hostname;
 
-    // TODO: replace with API call
-    await new Promise((r) => setTimeout(r, 800));
+      const result = await createWayForPayInvoice({
+        merchantDomainName,
+        orderReference,
+        orderDate,
+        amount: 1000,
+        productName: [`Відеопривітання для ${data.childName} з нагоди ${data.age} років.`],
+        productCount: [1],
+        productPrice: [1000],
+      });
 
-    reset();
-    alert("Дякуємо! Ми звʼяжемось з вами в Telegram 💛");
+      if (result.success && result.url) {
+        await sendOrder(data);
+        window.location.href = result.url;
+      } else {
+        alert(result.message || "Помилка при створенні оплати");
+      }
+    } catch (error) {
+      console.error("Payment error:", error);
+      alert("Сталася помилка при підготовці оплати");
+    }
   };
 
   return (
@@ -87,8 +109,19 @@ export default function VideoGreetingForm() {
         </Field>
 
         <Field
+          label="Дата народження"
+          error={errors.birthday?.message}
+        >
+          <Input
+            type="date"
+            {...register("birthday", {
+              required: "Вкажіть дату народження",
+            })}
+          />
+        </Field>
+
+        <Field
           label="Telegram для звʼязку"
-          error={errors.telegram?.message}
         >
           <Input
             placeholder="@username"
@@ -97,14 +130,14 @@ export default function VideoGreetingForm() {
         </Field>
         <Field
           label="Ваш email"
-          error={errors.telegram?.message}
+          error={errors.email?.message}
         >
           <Input
             placeholder="Вкажіть Ваш email"
-            {...register("telegram", {
+            {...register("email", {
               required: "Email обовʼязковий",
               pattern: {
-                value: /^@?[a-zA-Z0-9_]{5,}$/,
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                 message: "Невірний email",
               },
             })}
@@ -113,7 +146,7 @@ export default function VideoGreetingForm() {
       </div>
 
       {/* Notes */}
-{/*       <Field label="Побажання або важливі деталі">
+      {/*       <Field label="Побажання або важливі деталі">
         <Textarea
           placeholder="Напишіть, якщо є особливі побажання"
           {...register("notes")}

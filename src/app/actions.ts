@@ -5,25 +5,32 @@ import crypto from 'crypto'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-export async function sendOrder(prevState: any, formData: FormData) {
-  const name = formData.get('name')
-  const email = formData.get('email')
-  const phone = formData.get('phone')
-  const childName = formData.get('childName')
-  const comment = formData.get('comment')
+interface FormDataParams {
+  childName: string
+  childNameCute: string
+  age: number
+  birthday: string
+  telegram: string
+  email: string
+  notes?: string
+}
+
+export async function sendOrder(formData: FormDataParams) {
+  const { childName, childNameCute, age, birthday, telegram, email} = formData
 
   try {
-    const { data, error } = await resend.emails.send({
-      from: 'Pani Yulya Shop <onboarding@resend.dev>',
-      to: ['your-email@example.com'], // ❗ Replace with your actual email
+    const { _, error } = await resend.emails.send({
+      from: 'Pani Yulya <noreply@pani-yulya.kids>',
+      to: ['kolodyulya@gmail.com'],
       subject: 'Нове замовлення відеопривітання',
       html: `
         <h1>Нове замовлення!</h1>
-        <p><strong>Ім'я:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Телефон:</strong> ${phone}</p>
         <p><strong>Ім'я дитини:</strong> ${childName}</p>
-        <p><strong>Коментар:</strong> ${comment}</p>
+        <p><strong>Пестлива форма імені:</strong> ${childNameCute}</p>
+        <p><strong>Вік:</strong> ${age}</p>
+        <p><strong>Дата народження:</strong> ${birthday}</p>
+        <p><strong>Telegram:</strong> ${telegram}</p>
+        <p><strong>Email:</strong> ${email}</p>
       `,
     })
 
@@ -109,7 +116,7 @@ export async function createWayForPayInvoice(params: {
     productCount: params.productCount,
     returnUrl: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://pani-yulya.kids'}/api/checkout/return`,
   }
-console.log('WayForPay POST Request Body:', body);
+
   try {
     const response = await fetch('https://api.wayforpay.com/api', {
       method: 'POST',
