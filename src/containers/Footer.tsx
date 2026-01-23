@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 const Footer = () => {
   return (
     <footer className="py-12" style={{ backgroundColor: "var(--secondary)" }}>
@@ -9,24 +11,30 @@ const Footer = () => {
 
         {/* Права частина - посилання */}
         <div className="flex space-x-6">
-          <a
+          <Link
             href="/about"
             className="hover:text-white transition-colors duration-200"
           >
-            About
-          </a>
-          <a
+            Про мене
+          </Link>
+          <Link
             href="/contact"
             className="hover:text-white transition-colors duration-200"
           >
-            Contact
-          </a>
-          <a
-            href="/privacy"
+            Контакти
+          </Link>
+          <Link
+            href="/terms"
             className="hover:text-white transition-colors duration-200"
           >
-            Privacy
-          </a>
+            Умови використання
+          </Link>
+          <Link
+            href="/refund-policy"
+            className="hover:text-white transition-colors duration-200"
+          >
+            Повернення коштів
+          </Link>
         </div>
 
         {/* Соцмережі */}

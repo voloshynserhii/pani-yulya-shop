@@ -11,7 +11,7 @@ export default function AboutPage() {
       <Header />
       <section className="min-h-screen flex items-center justify-center py-24 px-6 pt-32">
         <div className="w-full">
-          <h1 className="text-3xl font-bold mb-4">Про нас</h1>
+          <h1 className="text-3xl font-bold mb-4">Про мене</h1>
           <p className="text-lg text-zinc-700 dark:text-zinc-300">
             Ласкаво просимо — це сторінка про мене. Тут можна додати інформацію
             про проект, авторів та контактні деталі.
