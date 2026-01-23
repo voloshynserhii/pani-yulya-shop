@@ -19,7 +19,7 @@ export async function sendOrder(formData: FormDataParams) {
   const { childName, childNameCute, age, birthday, telegram, email} = formData
 
   try {
-    const { _, error } = await resend.emails.send({
+    const { error } = await resend.emails.send({
       from: 'Pani Yulya <noreply@pani-yulya.kids>',
       to: ['kolodyulya@gmail.com'],
       subject: 'Нове замовлення відеопривітання',
@@ -40,6 +40,7 @@ export async function sendOrder(formData: FormDataParams) {
 
     return { success: true, message: 'Замовлення відправлено!' }
   } catch (error) {
+    console.log(error)
     return { success: false, message: 'Помилка при відправці' }
   }
 }
