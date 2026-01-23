@@ -1,13 +1,13 @@
 'use client'
 
-import { useEffect, useState, useRef, Suspense } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { Header } from '@/components/Header'
 import Footer from '@/containers/Footer'
 import { Button } from '@/components/ui'
 import { tracks } from '@/utils/musicTracks'
-import { generateWayForPaySignature } from '@/app/actions'
+import { createWayForPayInvoice } from '@/app/actions'
 import { CheckCircleIcon, XMarkIcon, ExclamationCircleIcon } from '@heroicons/react/24/outline'
 
 function CheckoutContent() {
@@ -15,13 +15,12 @@ function CheckoutContent() {
   const router = useRouter()
   const [showSuccess, setShowSuccess] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
-  const formRef = useRef<HTMLFormElement>(null)
   const [isLoading, setIsLoading] = useState(false)
 
   // Mock cart: using all tracks for demonstration
   // In a real app, you'd pull this from a Context or LocalStorage
-  const cartItems = tracks
-  const PRICE_PER_TRACK = 50 // UAH
+  const cartItems = [tracks[0]]
+  const PRICE_PER_TRACK = 1 // UAH
   const totalAmount = cartItems.length * PRICE_PER_TRACK
 
   useEffect(() => {
@@ -46,36 +45,30 @@ function CheckoutContent() {
 
   const handlePayment = async () => {
     setIsLoading(true)
+    
     try {
       const orderReference = `ORDER_${Date.now()}_${Math.floor(Math.random() * 1000)}`
-      const orderDate = Date.now()
-      const merchantAccount = process.env.NEXT_PUBLIC_WAYFORPAY_MERCHANT || 'test_merch_n1' // Default to test merchant
-      const merchantDomainName = typeof window !== 'undefined' ? window.location.hostname : 'pani-yulya.com'
+      const orderDate = Math.floor(Date.now() / 1000);
+      const merchantDomainName = typeof window !== 'undefined' ? window.location.hostname : 'pani-yulya.kids'
 
       const productNames = cartItems.map((t) => t.title)
       const productCounts = cartItems.map(() => 1)
       const productPrices = cartItems.map(() => PRICE_PER_TRACK)
 
-      const signature = await generateWayForPaySignature({
-        merchantAccount,
+      const result = await createWayForPayInvoice({
         merchantDomainName,
         orderReference,
         orderDate,
-        amount: totalAmount,
-        currency: 'UAH',
+        amount: +totalAmount.toFixed(2),
         productName: productNames,
         productCount: productCounts,
         productPrice: productPrices,
       })
 
-      // Fill form and submit
-      if (formRef.current) {
-        const form = formRef.current
-        ;(form.elements.namedItem('orderReference') as HTMLInputElement).value = orderReference
-        ;(form.elements.namedItem('orderDate') as HTMLInputElement).value = orderDate.toString()
-        ;(form.elements.namedItem('merchantSignature') as HTMLInputElement).value = signature
-        
-        form.submit()
+      if (result.success && result.url) {
+        window.location.href = result.url
+      } else {
+        setErrorMessage(result.message || 'Помилка при створенні оплати')
       }
     } catch (error) {
       console.error('Payment error:', error)
@@ -129,26 +122,6 @@ function CheckoutContent() {
           </div>
         </div>
 
-        {/* Hidden WayForPay Form */}
-        <form ref={formRef} method="post" action="https://secure.wayforpay.com/pay" acceptCharset="utf-8" className="hidden">
-          <input type="hidden" name="merchantAccount" value={process.env.NEXT_PUBLIC_WAYFORPAY_MERCHANT || 'test_merch_n1'} />
-          <input type="hidden" name="merchantAuthType" value="SimpleSignature" />
-          <input type="hidden" name="merchantDomainName" value="pani-yulya.com" />
-          <input type="hidden" name="orderReference" value="" />
-          <input type="hidden" name="orderDate" value="" />
-          <input type="hidden" name="amount" value={totalAmount} />
-          <input type="hidden" name="currency" value="UAH" />
-          <input type="hidden" name="merchantSignature" value="" />
-          <input type="hidden" name="returnUrl" value={`${typeof window !== 'undefined' ? window.location.origin : ''}/api/checkout/return`} />
-          {cartItems.map((track, i) => (
-            <div key={i}>
-              <input type="hidden" name="productName[]" value={track.title} />
-              <input type="hidden" name="productPrice[]" value={PRICE_PER_TRACK} />
-              <input type="hidden" name="productCount[]" value="1" />
-            </div>
-          ))}
-        </form>
-
         {/* Error Modal */}
         {errorMessage && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
@@ -178,6 +151,7 @@ function CheckoutContent() {
               </div>
               <h2 className="text-2xl font-bold mb-2">Оплата успішна!</h2>
               <p className="text-muted-foreground mb-6">Дякуємо за покупку. Ваші файли вже доступні для завантаження в розділі "Мої пісні".</p>
+              
               <Button onClick={() => router.push('/my-songs')} className="w-full">Перейти до пісень</Button>
             </div>
           </div>
