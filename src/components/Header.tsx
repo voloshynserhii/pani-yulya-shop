@@ -3,8 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-
+import { Bars3Icon, XMarkIcon, ShoppingCartIcon, UserIcon } from '@heroicons/react/24/outline';
 
 const navLinks = [
   { name: "Головна", href: "/" },
@@ -35,10 +34,19 @@ export const Header = () => {
           <nav className="hidden md:flex space-x-12">
             {navLinks.map((link) => (
               <Link key={link.name} href={link.href} className="font-bold">
-                  {link.name}
+                {link.name}
               </Link>
             ))}
           </nav>
+
+          <div className="flex items-center gap-4 z-10">
+            <Link href='/account' className="font-bold">
+              <UserIcon className="h-6 w-6" />
+            </Link>
+            <Link href='/checkout' className="font-bold">
+              <ShoppingCartIcon className="h-6 w-6" />
+            </Link>
+          </div>
 
           <div className="md:hidden">
             <button
