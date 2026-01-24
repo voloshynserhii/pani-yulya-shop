@@ -2,6 +2,8 @@
 
 import { Resend } from 'resend'
 import crypto from 'crypto'
+import dbConnect from '@/lib/mongodb'
+import User from '@/models/User'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -12,11 +14,19 @@ interface FormDataParams {
   birthday: string
   telegram: string
   email: string
-  notes?: string
+}
+
+interface OrderParams {
+  reference: string
+  amount: number
+  currency: string
+  productData: { childName: string, childNameCute: string, age: number, birthday: string },
+  contacts: { email: string, telegram: string },
+  orderDate: Date,
 }
 
 export async function sendOrder(formData: FormDataParams) {
-  const { childName, childNameCute, age, birthday, telegram, email} = formData
+  const { childName, childNameCute, age, birthday, telegram, email } = formData
 
   try {
     const { error } = await resend.emails.send({
@@ -85,7 +95,7 @@ export async function createWayForPayInvoice(params: {
   productPrice: number[]
 }) {
   const merchantAccount = process.env.NEXT_PUBLIC_WAYFORPAY_MERCHANT || 'test_merch_n1'
-  
+
   const sanitizedProductNames = params.productName.map(n => n.replace(/;/g, ' '))
 
   const signature = await generateWayForPaySignature({
@@ -130,10 +140,33 @@ export async function createWayForPayInvoice(params: {
     if (result.reasonCode === 1100 && result.invoiceUrl) {
       return { success: true, url: result.invoiceUrl }
     }
-    
+
     return { success: false, message: result.reason || 'Помилка створення інвойсу' }
   } catch (error) {
     console.error('WayForPay API Error:', error)
     return { success: false, message: 'Помилка з\'єднання з платіжною системою' }
+  }
+}
+
+export async function saveOrderToDb(order: OrderParams) {
+  try {
+    await dbConnect()
+    const email = order.contacts.email
+
+    await User.findOneAndUpdate(
+      { email },
+      {
+        $setOnInsert: { email },
+        $push: { orders: order },
+      },
+      {
+        upsert: true,
+        new: true,
+      }
+    )
+    return { success: true }
+  } catch (error) {
+    console.error("DB Error:", error)
+    return { success: false }
   }
 }

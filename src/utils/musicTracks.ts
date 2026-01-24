@@ -2,6 +2,7 @@ interface MusicTrack {
   trackId: string;
   title: string;
   coverSrc: string;
+  price?: number;
 }
 
 export const tracks: MusicTrack[] = [
@@ -9,145 +10,174 @@ export const tracks: MusicTrack[] = [
     trackId: "doremi",
     title: "До Ре Мі",
     coverSrc: "/images/music/doremi.jpeg",
+    price: 49,
   },
   {
     trackId: "zabka",
     title: "Жабка",
     coverSrc: "/images/music/zabka.jpeg",
+    price: 49,
   },
   {
     trackId: "lito",
     title: "Літо",
     coverSrc: "/images/music/lito.png",
+    price: 49,
   },
   {
     trackId: "buldozer",
     title: "Їде Бульдозер",
     coverSrc: "/images/music/buldozer.jpeg",
+    price: 79,
   },
   {
     trackId: "cosmos",
     title: "Космос",
     coverSrc: "/images/music/cosmos.jpeg",
+    price: 49,
   },
   {
     trackId: "twaryny",
     title: "Що їдять тварини",
     coverSrc: "/images/music/tvaryny.jpeg",
+    price: 49,
   },
   {
     trackId: "dino",
     title: "Динозаври",
     coverSrc: "/images/music/dino.jpeg",
+    price: 49,
   },
   {
     trackId: "kolyskova",
     title: "Колискова",
     coverSrc: "/images/music/kolyskova.jpeg",
+    price: 49,
   },
   {
     trackId: "ovochi",
     title: "Овочі",
     coverSrc: "/images/music/ovochi.jpeg",
+    price: 49,
   },
   {
     trackId: "traffic-lights",
     title: "Світлофор",
     coverSrc: "/images/music/traffic-lights.png",
+    price: 49,
   },
   {
     trackId: "сhemni-slova",
     title: "Світлофор",
     coverSrc: "/images/music/сhemni-slova.jpeg",
+    price: 49,
   },
   {
     trackId: "bubbles",
     title: "Бульбашки",
     coverSrc: "/images/music/bubbles.jpeg",
+    price: 49,
   },
   {
     trackId: "emotions",
     title: "Емоції",
     coverSrc: "/images/music/emotions.jpeg",
+    price: 49,
   },
   {
     trackId: "africa",
     title: "Африка",
     coverSrc: "/images/music/africa.jpeg",
+    price: 49,
   },
   {
     trackId: "ruhanka",
     title: "Руханка",
     coverSrc: "/images/music/ruhanka.jpeg",
+    price: 49,
   },
   {
     trackId: "birthday",
     title: "З Днем народження!",
     coverSrc: "/images/music/birthday.jpeg",
+    price: 49,
   },
   {
     trackId: "car",
     title: "Машина їде",
     coverSrc: "/images/music/car.jpeg",
+    price: 49,
   },
   {
     trackId: "mykolay",
     title: "Святий Миколай",
     coverSrc: "/images/music/mykolay.jpeg",
+    price: 49,
   },
   {
     trackId: "snowman",
     title: "Це Сніговик",
     coverSrc: "/images/music/snowman.jpeg",
+    price: 49,
   },
   {
     trackId: "5-birds",
     title: "П'ятеро пташенят",
     coverSrc: "/images/music/5-birds.jpeg",
+    price: 49,
   },
   {
     trackId: "parovoz",
     title: "Паровозик їде, їде",
     coverSrc: "/images/music/parovoz.jpeg",
+    price: 49,
   },
   {
     trackId: "shark",
     title: "Акула",
     coverSrc: "/images/music/shark.jpeg",
+    price: 49,
   },
   {
     trackId: "monkeys",
     title: "10 Мавпеняток",
     coverSrc: "/images/music/monkeys.jpeg",
+    price: 49,
   },
   {
     trackId: "money",
     title: "Гроші",
     coverSrc: "/images/music/money.jpeg",
+    price: 49,
   },
   {
     trackId: "love-myself",
     title: "Я люблю себе",
     coverSrc: "/images/music/love-myself.jpeg",
+    price: 49,
   },
   {
     trackId: "ukraine",
     title: "Україна",
     coverSrc: "/images/music/ukraine.jpeg",
+    price: 49,
   },
   {
     trackId: "potyag",
     title: "Їде Потяг",
     coverSrc: "/images/music/potyag.jpeg",
+    price: 49,
   },
   {
     trackId: "traktor",
     title: "Трактор",
     coverSrc: "/images/music/traktor.jpeg",
+    price: 49,
   },
   {
     trackId: "vesela-pisenka",
     title: "Весела Пісенька",
     coverSrc: "/images/music/vesela-pisenka.jpeg",
+    price: 29,
   },
 ];

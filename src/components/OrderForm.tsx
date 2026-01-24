@@ -7,7 +7,7 @@ import { Button } from "@/components/ui";
 import { Input } from "@/components/ui";
 import { Label } from "@/components/ui";
 import { createWayForPayInvoice } from "@/app/actions";
-import { sendOrder } from "@/app/actions";
+import { sendOrder, saveOrderToDb } from "@/app/actions";
 
 type FormData = {
   childName: string;
@@ -36,23 +36,46 @@ export default function VideoGreetingForm() {
   });
 
   const onSubmit = async (data: FormData) => {
+    if (!data.childName || !data.age || !data.birthday || !data.email) return;
+
     try {
       const orderReference = `ORDER_VIDEO_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
       const orderDate = Math.floor(Date.now() / 1000);
       const merchantDomainName = window.location.hostname;
+      const productName = [`Відеопривітання для ${data.childName} з нагоди ${data.age} років.`];
 
       const result = await createWayForPayInvoice({
         merchantDomainName,
         orderReference,
         orderDate,
         amount: 1000,
-        productName: [`Відеопривітання для ${data.childName} з нагоди ${data.age} років.`],
+        productName,
         productCount: [1],
         productPrice: [1000],
       });
 
       if (result.success && result.url) {
-        await sendOrder(data);
+        try {
+          await sendOrder(data);
+
+          const { telegram = '', childName, childNameCute, age, birthday } = data;
+          const email = data.email.toLowerCase().trim();
+
+          const order = {
+            reference: orderReference,
+            amount: 1000,
+            currency: 'UAH',
+            productData: { childName, childNameCute, age, birthday },
+            contacts: { email, telegram },
+            orderDate: new Date(),
+          };
+
+          await saveOrderToDb(order);
+
+        } catch (error) {
+          console.error("DB Error:", error);
+        }
+
         window.location.href = result.url;
       } else {
         alert(result.message || "Помилка при створенні оплати");

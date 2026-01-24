@@ -1,11 +1,16 @@
 import mongoose from 'mongoose';
 
-const OrderSchema = new mongoose.Schema({
-  trackId: String,
-  amount: Number,
-  date: { type: Date, default: Date.now },
-  orderReference: String,
-});
+const OrderSchema = new mongoose.Schema(
+  {
+    reference: { type: String, required: true, unique: true },
+    amount: { type: Number, required: true, min: 0 },
+    currency: { type: String, enum: ['UAH'], default: 'UAH' },
+    productData: { type: Object },
+    contacts: { type: Object },
+    orderDate: { type: Date },
+  }, { timestamps: true }
+);
+
 
 const UserSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },

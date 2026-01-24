@@ -16,11 +16,9 @@ export async function requestLoginCode(prevState: any, formData: FormData) {
 
   await dbConnect();
 
-  // Generate 4 digit code
   const code = Math.floor(1000 + Math.random() * 9000).toString();
   const expires = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
 
-  // Find or create user and set code
   await User.findOneAndUpdate(
     { email },
     { 
