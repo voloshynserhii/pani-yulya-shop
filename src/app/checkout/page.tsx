@@ -172,9 +172,6 @@ function CheckoutContent() {
                 >
                   {isLoading ? 'Обробка...' : 'Оплатити через WayForPay'}
                 </Button>
-{/*                 <Button size="lg" className="w-full" onClick={handlePayment} disabled={isLoading || cartItems.length === 0}>
-                  {isLoading ? 'Обробка...' : 'Оплатити через WayForPay'}
-                </Button> */}
               </div>
             </div>
           </div>

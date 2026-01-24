@@ -19,8 +19,8 @@ export const Hero = ({
   imageAlt,
   title,
   description,
-/*   buttonText,
-  buttonLink, */
+  buttonText,
+  buttonLink,
   imagePosition = "left",
 }: HeroProps) => {
   const imageContent = (
@@ -43,8 +43,9 @@ export const Hero = ({
       <p className="text-xl text-(--foreground) mb-8 text-center md:text-left leading-relaxed font-semibold">
         {description}
       </p>
-{/*       {buttonText && buttonLink && (
-        <div>
+
+      {buttonText && buttonLink && (
+        <div className="flex justify-center md:justify-start">
           <Link
             href={buttonLink}
             className="inline-block px-8 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition duration-300"
@@ -52,7 +53,7 @@ export const Hero = ({
             {buttonText}
           </Link>
         </div>
-      )} */}
+      )}
     </div>
   );
 
