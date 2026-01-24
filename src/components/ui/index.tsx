@@ -37,7 +37,7 @@ export function Button({
 
   return (
     <button
-      style={{ backgroundColor }}
+      style={{ backgroundColor, cursor: 'pointer' }}
       className={`inline-flex items-center justify-center font-medium rounded-xl bg-black text-white hover:opacity-90 transition ${sizes[size]} ${className}`}
       {...props}
     />

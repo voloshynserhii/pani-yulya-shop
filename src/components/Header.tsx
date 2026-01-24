@@ -50,7 +50,7 @@ export const Header = () => {
 
           <nav className="hidden md:flex space-x-12">
             {navLinks.map((link) => (
-              <Link key={link.name} href={link.href} className="font-bold">
+              <Link key={link.name} href={link.href} className="font-bold hover:text-sky-300">
                 {link.name}
               </Link>
             ))}
@@ -58,10 +58,10 @@ export const Header = () => {
 
           <div className="hidden md:flex items-center gap-4 z-10">
             <Link href='/account' className="font-bold">
-              <UserIcon className="h-6 w-6" />
+              <UserIcon className="h-6 w-6 hover:text-sky-300" />
             </Link>
             <Link href='/checkout' className="font-bold relative">
-              <ShoppingCartIcon className="h-6 w-6" />
+              <ShoppingCartIcon className="h-6 w-6 hover:text-sky-300" />
               {cartCount > 0 && (
                 <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
                   {cartCount}
@@ -100,6 +100,7 @@ export const Header = () => {
               <Link href='/account' className="font-bold">
                 <UserIcon className="h-6 w-6" />
               </Link>
+
               <Link href='/checkout' className="font-bold relative">
                 <ShoppingCartIcon className="h-6 w-6" />
                 {cartCount > 0 && (
