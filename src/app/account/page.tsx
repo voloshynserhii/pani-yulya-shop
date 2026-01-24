@@ -74,7 +74,7 @@ export default async function AccountPage() {
                     <div className="flex flex-col md:flex-row justify-between gap-6">
                       <div className="space-y-4 flex-grow">
                         <div className="border-b border-zinc-100 dark:border-zinc-800 pb-4">
-                          <h3 className="text-lg font-semibold">Замовлення #{order.reference}</h3>
+                          <h3 className="text-sm font-semibold">Замовлення #{order.reference}</h3>
                           <p className="text-sm text-zinc-500">
                             {new Date(order.orderDate).toLocaleDateString('uk-UA', {
                               year: 'numeric',
@@ -114,7 +114,7 @@ export default async function AccountPage() {
                         </div>
                       </div>
                       
-                      <div className="flex flex-col justify-center items-center bg-zinc-50 dark:bg-zinc-800/50 rounded-lg p-6 min-w-[240px] text-center">
+                      <div className="flex flex-col justify-center items-center bg-zinc-50 dark:bg-zinc-800/50 rounded-lg p-6 min-w-[200px] text-center">
                          <div className="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-3">
                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />

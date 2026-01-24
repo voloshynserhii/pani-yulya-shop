@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Bars3Icon, XMarkIcon, ShoppingCartIcon, UserIcon } from '@heroicons/react/24/outline';
@@ -15,6 +15,25 @@ const navLinks = [
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [cartCount, setCartCount] = useState(0);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        isOpen &&
+        menuRef.current &&
+        !menuRef.current.contains(event.target as Node) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isOpen]);
 
   useEffect(() => {
     const updateCount = () => {
@@ -70,33 +89,8 @@ export const Header = () => {
             </Link>
           </div>
 
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-(--foreground) hover:text-blue-500 focus:outline-none"
-            >
-              {isOpen ? (
-                <XMarkIcon className="h-6 w-6" />
-              ) : (
-                <Bars3Icon className="h-6 w-6" />
-              )}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {isOpen && (
-        <div className="md:hidden bg-white shadow-md">
-          <nav className="px-5 py-5 space-y-1 flex flex-col gap-15">
-            <div className="flex flex-col gap-4">
-              {navLinks.map((link) => (
-                <Link key={link.name} href={link.href} onClick={() => setIsOpen(false)} className="font-bold block">
-                  {link.name}
-                </Link>
-              ))}
-            </div>
-
-            <div className="flex md:hidden items-center gap-8 z-10">
+          <div className="flex md:hidden gap-2 items-center">
+            <div className="flex md:hidden items-center gap-3 z-10">
               <Link href='/account' className="font-bold">
                 <UserIcon className="h-6 w-6" />
               </Link>
@@ -109,6 +103,32 @@ export const Header = () => {
                   </span>
                 )}
               </Link>
+
+              <button
+                ref={buttonRef}
+                onClick={() => setIsOpen(!isOpen)}
+                className="text-(--foreground) hover:text-blue-500 focus:outline-none"
+              >
+                {isOpen ? (
+                  <XMarkIcon className="h-6 w-6" />
+                ) : (
+                  <Bars3Icon className="h-6 w-6" />
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {isOpen && (
+        <div ref={menuRef} className="md:hidden bg-white shadow-md">
+          <nav className="px-10 py-10 space-y-1">
+            <div className="flex flex-col gap-8">
+              {navLinks.map((link) => (
+                <Link key={link.name} href={link.href} onClick={() => setIsOpen(false)} className="text-xl font-bold block">
+                  {link.name}
+                </Link>
+              ))}
             </div>
           </nav>
         </div>

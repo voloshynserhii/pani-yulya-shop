@@ -1,22 +1,21 @@
 "use client";
 
-import { forwardRef } from "react";
+import { forwardRef, AudioHTMLAttributes } from "react";
 
-interface ProtectedAudioPlayerProps {
+interface ProtectedAudioPlayerProps extends AudioHTMLAttributes<HTMLAudioElement> {
   trackId: string;
-  onEnded?: () => void;
 }
 
 const ProtectedAudioPlayer = forwardRef<
   HTMLAudioElement,
   ProtectedAudioPlayerProps
->(({ trackId, onEnded }, ref) => {
+>(({ trackId, ...props }, ref) => {
   return (
     <audio
       ref={ref}
       src={`/api/audio/${trackId}.mp3`}
       preload="none"
-      onEnded={onEnded}
+      {...props}
     />
   );
 });
