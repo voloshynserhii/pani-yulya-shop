@@ -65,7 +65,7 @@ export async function verifyLoginCode(prevState: any, formData: FormData) {
 
   await login(email);
 
-  return { success: true, message: 'Успішний вхід!' };
+  return { success: true, message: 'Успішний вхід!', email };
 }
 
 export async function signOut() {

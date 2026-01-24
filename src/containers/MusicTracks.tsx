@@ -1,12 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MusicTrackCard from "@/components/MusicTrackCard";
 import { Button } from "@/components/ui";
 import { tracks } from "@/utils/musicTracks";
+import { getPurchasedTrackIds } from "@/app/actions";
 
 export default function MusicTracksSection() {
   const [visibleCount, setVisibleCount] = useState(6);
+  const [purchasedTrackIds, setPurchasedTrackIds] = useState<string[]>([]);
+
+  useEffect(() => {
+    const fetchAccess = async () => {
+      
+      const ids = await getPurchasedTrackIds();
+      if (ids?.length) setPurchasedTrackIds(ids);
+    };
+
+    fetchAccess();
+  }, []);
 
   const handleToggleView = () => {
     if (visibleCount >= tracks.length) {
@@ -45,7 +57,8 @@ export default function MusicTracksSection() {
               title={track.title}
               coverSrc={track.coverSrc}
               trackId={track.trackId}
-              hasAccess={true} // ❗ ЗАМІНИ на реальну логіку доступу
+              price={track.price}
+              hasAccess={purchasedTrackIds.includes(track.trackId)}
             />
           ))}
         </div>

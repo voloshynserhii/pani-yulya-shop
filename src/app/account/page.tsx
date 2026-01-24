@@ -1,5 +1,8 @@
+import Image from 'next/image'
+import Link from 'next/link'
 import { Header } from '@/components/Header'
 import Footer from '@/containers/Footer'
+import { Download } from 'lucide-react'
 import LoginForm from '@/components/LoginForm'
 import { getSession } from '@/lib/auth'
 import dbConnect from '@/lib/mongodb'
@@ -7,8 +10,6 @@ import User from '@/models/User'
 import { signOut } from '@/app/account/actions'
 import { Button } from '@/components/ui'
 import { tracks } from '@/utils/musicTracks'
-import Image from 'next/image'
-import Link from 'next/link'
 
 export const metadata = {
   title: 'Особистий кабінет',
@@ -33,14 +34,19 @@ export default async function AccountPage() {
   const user = await User.findOne({ email: session.email })
   
   // Map purchased track IDs to actual track objects
-  // Assuming user.orders contains objects with trackId
-  const purchasedTracks = user?.orders?.map((order: any) => {
-    return tracks.find(t => t.trackId === order.trackId)
-  }).filter(Boolean) || []
+  const purchasedTrackIds = new Set<string>()
+  const videoGreetings: any[] = []
 
-  // Remove duplicates if any
-  const uniqueTracks = Array.from(new Set(purchasedTracks.map((t: any) => t.trackId)))
-    .map(id => purchasedTracks.find((t: any) => t.trackId === id))
+  user?.orders?.forEach((order: any) => {
+    if (order.productType === 'music_track' && order.productData?.trackIds) {
+      order.productData.trackIds.forEach((id: string) => purchasedTrackIds.add(id))
+    } else if (order.productType === 'video_greeting') {
+      videoGreetings.push(order)
+    }
+  })
+
+  videoGreetings.sort((a, b) => new Date(b.orderDate).getTime() - new Date(a.orderDate).getTime())
+  const uniqueTracks = Array.from(purchasedTrackIds).map(id => tracks.find(t => t.trackId === id)).filter(Boolean)
 
   return (
     <div className="flex min-h-screen flex-col bg-zinc-50 font-sans dark:bg-black">
@@ -59,6 +65,75 @@ export default async function AccountPage() {
             <p className="text-zinc-600 dark:text-zinc-400">Email: <span className="text-zinc-900 dark:text-zinc-100 font-medium">{user?.email}</span></p>
           </div>
 
+          {videoGreetings.length > 0 && (
+            <div className="space-y-6">
+              <h2 className="text-2xl font-bold">Мої відеопривітання</h2>
+              <div className="grid grid-cols-1 gap-6">
+                {videoGreetings.map((order: any) => (
+                  <div key={order.reference} className="bg-white dark:bg-zinc-900 p-6 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800">
+                    <div className="flex flex-col md:flex-row justify-between gap-6">
+                      <div className="space-y-4 flex-grow">
+                        <div className="border-b border-zinc-100 dark:border-zinc-800 pb-4">
+                          <h3 className="text-lg font-semibold">Замовлення #{order.reference}</h3>
+                          <p className="text-sm text-zinc-500">
+                            {new Date(order.orderDate).toLocaleDateString('uk-UA', {
+                              year: 'numeric',
+                              month: 'long',
+                              day: 'numeric',
+                              hour: '2-digit',
+                              minute: '2-digit'
+                            })}
+                          </p>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 text-sm">
+                          <div>
+                            <p className="text-zinc-500 text-xs uppercase tracking-wider font-medium">Ім'я дитини</p>
+                            <p className="font-medium text-base">{order.productData?.childName}</p>
+                          </div>
+                          <div>
+                            <p className="text-zinc-500 text-xs uppercase tracking-wider font-medium">Пестливе ім'я</p>
+                            <p className="font-medium text-base">{order.productData?.childNameCute}</p>
+                          </div>
+                          <div>
+                            <p className="text-zinc-500 text-xs uppercase tracking-wider font-medium">Вік</p>
+                            <p className="font-medium text-base">{order.productData?.age} років</p>
+                          </div>
+                          <div>
+                            <p className="text-zinc-500 text-xs uppercase tracking-wider font-medium">Дата народження</p>
+                            <p className="font-medium text-base">{order.productData?.birthday}</p>
+                          </div>
+                          <div>
+                            <p className="text-zinc-500 text-xs uppercase tracking-wider font-medium">Telegram</p>
+                            <p className="font-medium text-base">{order.contacts?.telegram || '-'}</p>
+                          </div>
+                          <div>
+                            <p className="text-zinc-500 text-xs uppercase tracking-wider font-medium">Сума</p>
+                            <p className="font-medium text-base">{order.amount} {order.currency}</p>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="flex flex-col justify-center items-center bg-zinc-50 dark:bg-zinc-800/50 rounded-lg p-6 min-w-[240px] text-center">
+                         <div className="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-3">
+                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                             <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                           </svg>
+                         </div>
+                         <span className="text-sm font-semibold text-green-700 mb-2">
+                           Оплачено успішно
+                         </span>
+                         <p className="text-xs text-zinc-500">
+                           Ми зв'яжемось з вами в Telegram для уточнення деталей створення відео.
+                         </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           <div className="space-y-6">
             <h2 className="text-2xl font-bold">Мої покупки</h2>
             {uniqueTracks.length > 0 ? (
@@ -71,6 +146,14 @@ export default async function AccountPage() {
                     <div className="p-4">
                       <h3 className="font-medium mb-2">{track.title}</h3>
                       <audio controls className="w-full h-8" src={`/api/audio/${track.trackId}.mp3`} />
+                      <a
+                        href={`/api/audio/download/${track.trackId}.mp3`}
+                        download
+                        className="flex items-center justify-center w-full mt-3 py-2 text-sm font-medium text-zinc-700 bg-zinc-100 rounded-lg hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700 transition-colors"
+                      >
+                        <Download className="w-4 h-4 mr-2" />
+                        Завантажити
+                      </a>
                     </div>
                   </div>
                 ))}

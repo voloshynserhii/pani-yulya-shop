@@ -8,12 +8,12 @@ export async function GET(req: NextRequest, context: { params: Promise<{ trackId
   /* =====================
      1. AUTH / PURCHASE CHECK
   ===================== */
-  const userHasAccess = true; // твоя реальна логіка
+/*   const userHasAccess = true; // твоя реальна логіка
 
   if (!userHasAccess) {
     return new Response("Forbidden", { status: 403 });
   }
-
+ */
   /* =====================
      2. FILE PATH
   ===================== */

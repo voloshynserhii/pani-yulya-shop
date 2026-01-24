@@ -2,8 +2,10 @@
 
 import { Resend } from 'resend'
 import crypto from 'crypto'
+import { cookies } from 'next/headers'
 import dbConnect from '@/lib/mongodb'
 import User from '@/models/User'
+import { getSession, login } from '@/lib/auth'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -20,8 +22,9 @@ interface OrderParams {
   reference: string
   amount: number
   currency: string
-  productData: { childName: string, childNameCute: string, age: number, birthday: string },
-  contacts: { email: string, telegram: string },
+  productType: string
+  productData: { childName?: string, childNameCute?: string, age?: number, birthday?: string, trackIds?: string[] },
+  contacts: { email: string, telegram?: string },
   orderDate: Date,
 }
 
@@ -164,9 +167,47 @@ export async function saveOrderToDb(order: OrderParams) {
         new: true,
       }
     )
+    
+    await login(email)
+
     return { success: true }
   } catch (error) {
     console.error("DB Error:", error)
     return { success: false }
+  }
+}
+
+export async function getPurchasedTrackIds() {
+  try {
+    await dbConnect()
+    
+    let userEmail: string | undefined
+    const session = await getSession()
+
+    if (session?.email) {
+      userEmail = session.email
+    } else {
+      const cookieStore = await cookies()
+      userEmail = cookieStore.get('user_email')?.value
+    }
+
+    if (!userEmail) return []
+
+    const user = await User.findOne({ email: userEmail }).populate('orders').lean()
+
+    if (!user || !user.orders) return []
+
+    const trackIds = new Set<string>()
+
+    user.orders.forEach((order: any) => {
+      if (order.productType === 'music_track' && order.productData?.trackIds) {
+        order.productData.trackIds.forEach((id: string) => trackIds.add(id))
+      }
+    })
+
+    return Array.from(trackIds)
+  } catch (error) {
+    console.error("DB Error:", error)
+    return []
   }
 }

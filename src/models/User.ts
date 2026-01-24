@@ -5,6 +5,7 @@ const OrderSchema = new mongoose.Schema(
     reference: { type: String, required: true, unique: true },
     amount: { type: Number, required: true, min: 0 },
     currency: { type: String, enum: ['UAH'], default: 'UAH' },
+    productType: { type: String, enum: ['video_greeting', 'music_track', 'toy'], required: true },
     productData: { type: Object },
     contacts: { type: Object },
     orderDate: { type: Date },

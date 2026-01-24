@@ -3,8 +3,9 @@
 import * as React from "react";
 import Image from "next/image";
 import { Play, Pause } from "lucide-react";
+import { useRouter } from "next/navigation";
 
-import { Card } from "@/components/ui";
+import { Card, Button } from "@/components/ui";
 import ProtectedAudioPlayer from "@/components/ProtectedAudioPlayer";
 
 interface MusicTrackCardProps {
@@ -12,19 +13,28 @@ interface MusicTrackCardProps {
   title: string;
   coverSrc: string;
   hasAccess: boolean;       // ← після покупки
+  price?: number;
 }
 
 export default function MusicTrackCard({
   trackId,
   title,
   coverSrc,
-  hasAccess,
+  hasAccess = false,
+  price = 50,
 }: MusicTrackCardProps) {
   const audioRef = React.useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = React.useState(false);
+  const [isInCart, setIsInCart] = React.useState(false);
+  const router = useRouter();
+
+  React.useEffect(() => {
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    setIsInCart(cart.some((i: any) => i.trackId === trackId));
+  }, [trackId]);
 
   const togglePlay = async () => {
-    if (!audioRef.current || !hasAccess) return;
+    if (!audioRef.current) return;
 
     if (isPlaying) {
       audioRef.current.pause();
@@ -33,6 +43,22 @@ export default function MusicTrackCard({
     }
 
     setIsPlaying(!isPlaying);
+  };
+
+  const handleCartAction = () => {
+    if (isInCart) {
+      router.push("/checkout");
+      return;
+    }
+
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    const item = { trackId, title, coverSrc, price };
+    
+    if (!cart.some((i: any) => i.trackId === trackId)) {
+      cart.push(item);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      setIsInCart(true);
+    }
   };
 
   return (
@@ -49,12 +75,7 @@ export default function MusicTrackCard({
         {/* Overlay */}
         <button
           onClick={togglePlay}
-          disabled={!hasAccess}
-          className={`absolute inset-0 flex items-center justify-center transition
-            ${hasAccess
-              ? "bg-black/40 opacity-0 hover:opacity-100"
-              : "bg-black/60 cursor-not-allowed"
-            }`}
+          className={'absolute inset-0 flex items-center justify-center transition bg-black/40 opacity-0 hover:opacity-100'}
           aria-label={isPlaying ? "Pause" : "Play"}
         >
           {isPlaying ? (
@@ -69,10 +90,15 @@ export default function MusicTrackCard({
       <div className="p-4 space-y-2">
         <h3 className="text-lg font-medium leading-tight">{title}</h3>
 
-       {!hasAccess && (
-          <p className="text-sm text-muted-foreground">
-            Доступно після покупки
-          </p>
+       {!hasAccess ? (
+          <div className="flex items-center justify-between pt-2">
+            <span className="font-semibold">{price} грн</span>
+            <Button size="sm" onClick={handleCartAction}>
+              {isInCart ? "Вже в кошику" : "Купити"}
+            </Button>
+          </div>
+        ) : (
+          <div className="pt-2 text-green-600 font-semibold">Доступно для скачування в профілі</div>
         )}
       </div>
 

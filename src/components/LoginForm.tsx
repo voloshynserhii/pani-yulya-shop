@@ -1,9 +1,9 @@
 'use client'
 
-import { useFormState, useFormStatus } from 'react-dom'
+import { useFormStatus } from 'react-dom'
+import { useActionState, useEffect, useState } from 'react'
 import { requestLoginCode, verifyLoginCode } from '@/app/account/actions'
 import { Button, Input, Label } from '@/components/ui'
-import { useEffect, useState } from 'react'
 
 const initialState = { success: false, message: '', step: 'email', email: '' }
 
@@ -17,8 +17,8 @@ function SubmitButton({ text }: { text: string }) {
 }
 
 export default function LoginForm() {
-  const [state, formAction] = useFormState(requestLoginCode, initialState)
-  const [verifyState, verifyAction] = useFormState(verifyLoginCode, { success: false, message: '' })
+  const [state, formAction] = useActionState(requestLoginCode, initialState)
+  const [verifyState, verifyAction] = useActionState(verifyLoginCode, { success: false, message: '' })
   const [step, setStep] = useState('email')
   const [email, setEmail] = useState('')
 

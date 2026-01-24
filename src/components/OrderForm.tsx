@@ -65,6 +65,7 @@ export default function VideoGreetingForm() {
             reference: orderReference,
             amount: 1000,
             currency: 'UAH',
+            productType: 'video_greeting',
             productData: { childName, childNameCute, age, birthday },
             contacts: { email, telegram },
             orderDate: new Date(),

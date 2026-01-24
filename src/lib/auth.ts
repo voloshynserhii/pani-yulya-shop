@@ -22,7 +22,9 @@ export async function decrypt(input: string): Promise<any> {
 export async function getSession() {
   const cookieStore = await cookies();
   const session = cookieStore.get('session')?.value;
+
   if (!session) return null;
+  
   try {
     return await decrypt(session);
   } catch (error) {
@@ -42,9 +44,18 @@ export async function login(email: string) {
     sameSite: 'lax',
     path: '/',
   });
+
+  cookieStore.set('user_email', email, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    expires,
+    sameSite: 'lax',
+    path: '/',
+  });
 }
 
 export async function logout() {
   const cookieStore = await cookies();
   cookieStore.set('session', '', { expires: new Date(0) });
+  cookieStore.set('user_email', '', { expires: new Date(0) });
 }

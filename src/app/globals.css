@@ -8,6 +8,7 @@
   --accent: #ffc802;
   --button: #0056b3;
   --burgundy: #7a2434;
+  --disabledBtn: #D3D3D3;
 }
 
 @theme inline {
