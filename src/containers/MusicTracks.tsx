@@ -36,7 +36,7 @@ export default function MusicTracksSection() {
       <div className="max-w-7xl mx-auto px-[30px] sm:px-6 lg:px-8">
         <header className="mb-10 space-y-3">
           <h2 className="text-4xl md:text-5xl font-semibold leading-tight text-center lg:text-left">Музика Пані Юлі завжди з вами</h2>
-          <p className="text-muted-foreground max-w-2xl">
+          <p className="text-muted-foreground max-w-2xl text-center lg:text-left">
             Улюблені пісні в MP3-форматі: без реклами, без інтернету, назавжди у вашій колекції
           </p>
           <p className="text-muted-foreground max-w-2xl">
