@@ -35,6 +35,7 @@ function CheckoutContent() {
       setShowSuccess(true)
       localStorage.removeItem('cart')
       setCartItems([])
+      window.dispatchEvent(new Event("cart-updated"))
     } else if (status === 'error') {
       if (reason === '1118') {
         setErrorMessage('Помилка підпису (1118). Перевірте секретний ключ в .env файлі.')
@@ -53,6 +54,7 @@ function CheckoutContent() {
     const updatedCart = cartItems.filter((item) => item.trackId !== trackId)
     setCartItems(updatedCart)
     localStorage.setItem('cart', JSON.stringify(updatedCart))
+    window.dispatchEvent(new Event("cart-updated"))
   }
 
   const handlePayment = async () => {

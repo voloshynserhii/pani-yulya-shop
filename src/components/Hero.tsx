@@ -36,11 +36,11 @@ export const Hero = ({
   );
 
   const textContent = (
-    <div className="w-full md:w-1/2 flex flex-col justify-center px-6 md:px-12">
-      <h1 className="text-5xl md:text-7xl font-bold mb-15 whitespace-pre-line" style={{ color: "var(--foreground)" }}>
+    <div className="w-full md:w-1/2 flex flex-col justify-center md:px-12">
+      <h1 className="text-5xl lg:text-7xl font-bold mb-10 lg:mb-15 mt-10 text-center md:text-left whitespace-pre-line" style={{ color: "var(--foreground)" }}>
         {title}
       </h1>
-      <p className="text-2xl text-(--foreground) mb-8 leading-relaxed font-semibold">
+      <p className="text-xl text-(--foreground) mb-8 text-center md:text-left leading-relaxed font-semibold">
         {description}
       </p>
 {/*       {buttonText && buttonLink && (

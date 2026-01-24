@@ -58,11 +58,12 @@ export default function MusicTrackCard({
       cart.push(item);
       localStorage.setItem("cart", JSON.stringify(cart));
       setIsInCart(true);
+      window.dispatchEvent(new Event("cart-updated"));
     }
   };
 
   return (
-    <Card className="w-full max-w-sm overflow-hidden rounded-2xl shadow-sm">
+    <Card className="w-full overflow-hidden rounded-2xl shadow-sm">
       {/* Cover */}
       <div className="relative aspect-square">
         <Image

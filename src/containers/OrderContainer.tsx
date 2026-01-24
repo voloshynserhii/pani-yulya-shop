@@ -8,7 +8,7 @@ export default function OrderSection() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center px-[30px] sm:px-0">
         <div className="space-y-8 flex flex-col justify-center items-center">
           <div className="space-y-4">
-            <h1 className="text-4xl font-semibold leading-tight">
+            <h1 className="text-4xl md:text-5xl font-semibold leading-tight text-center lg:text-left">
               Персональне відеопривітання <br />
               <span className="text-muted-foreground">до дня народження дитини</span>
             </h1>

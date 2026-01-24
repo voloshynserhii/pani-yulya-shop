@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Bars3Icon, XMarkIcon, ShoppingCartIcon, UserIcon } from '@heroicons/react/24/outline';
@@ -14,6 +14,23 @@ const navLinks = [
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
+
+  useEffect(() => {
+    const updateCount = () => {
+      const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+      setCartCount(cart.length);
+    };
+
+    updateCount();
+    window.addEventListener("cart-updated", updateCount);
+    window.addEventListener("storage", updateCount);
+
+    return () => {
+      window.removeEventListener("cart-updated", updateCount);
+      window.removeEventListener("storage", updateCount);
+    };
+  }, []);
 
   return (
     <header className="w-full shadow-md fixed top-0 left-0 z-50" style={{ backgroundColor: "var(--secondary)" }}>
@@ -39,12 +56,17 @@ export const Header = () => {
             ))}
           </nav>
 
-          <div className="flex items-center gap-4 z-10">
+          <div className="hidden md:flex items-center gap-4 z-10">
             <Link href='/account' className="font-bold">
               <UserIcon className="h-6 w-6" />
             </Link>
-            <Link href='/checkout' className="font-bold">
+            <Link href='/checkout' className="font-bold relative">
               <ShoppingCartIcon className="h-6 w-6" />
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
             </Link>
           </div>
 
@@ -65,12 +87,28 @@ export const Header = () => {
 
       {isOpen && (
         <div className="md:hidden bg-white shadow-md">
-          <nav className="px-2 pt-2 pb-4 space-y-1">
-            {navLinks.map((link) => (
-              <Link key={link.name} href={link.href} onClick={() => setIsOpen(false)} className="font-bold block">
-                {link.name}
+          <nav className="px-5 py-5 space-y-1 flex flex-col gap-15">
+            <div className="flex flex-col gap-4">
+              {navLinks.map((link) => (
+                <Link key={link.name} href={link.href} onClick={() => setIsOpen(false)} className="font-bold block">
+                  {link.name}
+                </Link>
+              ))}
+            </div>
+
+            <div className="flex md:hidden items-center gap-8 z-10">
+              <Link href='/account' className="font-bold">
+                <UserIcon className="h-6 w-6" />
               </Link>
-            ))}
+              <Link href='/checkout' className="font-bold relative">
+                <ShoppingCartIcon className="h-6 w-6" />
+                {cartCount > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                    {cartCount}
+                  </span>
+                )}
+              </Link>
+            </div>
           </nav>
         </div>
       )}
