@@ -1,6 +1,6 @@
-import { Header } from '@/components/Header';
+import Header from '@/components/Header';
 import OrderSection from '@/containers/OrderContainer'
-import Footer from '@/containers/Footer'
+import Footer from '@/components/Footer'
 
 export const metadata = {
   title: 'Відео',

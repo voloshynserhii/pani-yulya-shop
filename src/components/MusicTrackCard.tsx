@@ -89,7 +89,7 @@ export default function MusicTrackCard({
   };
 
   return (
-    <Card className="w-full overflow-hidden rounded-2xl shadow-sm">
+    <Card className="w-full overflow-hidden rounded-2xl shadow-sm" style={{ backgroundColor: "var(--secondary)" }}>
       {/* Cover */}
       <div className="relative aspect-square">
         <Image

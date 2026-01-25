@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Header } from "@/components/Header";
+import Header from "@/components/Header";
 import Image from "next/image";
 import Link from "next/link";
 import { TrashIcon } from "@heroicons/react/24/outline";

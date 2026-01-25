@@ -12,7 +12,7 @@ const navLinks = [
   { name: "Про мене", href: "/about" },
 ];
 
-export const Header = () => {
+const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [cartCount, setCartCount] = useState(0);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -121,7 +121,7 @@ export const Header = () => {
       </div>
 
       {isOpen && (
-        <div ref={menuRef} className="md:hidden bg-white shadow-md">
+        <div ref={menuRef} className="md:hidden shadow-md">
           <nav className="px-10 py-10 space-y-1">
             <div className="flex flex-col gap-8">
               {navLinks.map((link) => (
@@ -136,3 +136,5 @@ export const Header = () => {
     </header>
   );
 };
+
+export default Header;

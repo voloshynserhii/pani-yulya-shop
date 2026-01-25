@@ -14,7 +14,7 @@ interface HeroProps {
   imagePosition?: "left" | "right";
 }
 
-export const Hero = ({
+const Hero = ({
   imageSrc,
   imageAlt,
   title,
@@ -75,3 +75,5 @@ export const Hero = ({
     </div>
   );
 };
+
+export default Hero;

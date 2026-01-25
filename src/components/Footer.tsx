@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Instagram } from 'lucide-react'
+import { Instagram, Youtube } from 'lucide-react'
 
 const TikTok = ({ className }: { className?: string }) => (
   <svg
@@ -82,6 +82,15 @@ const Footer = () => {
             aria-label="Instagram"
           >
             <Instagram className="w-6 h-6" />
+          </Link>
+          <Link
+            href="https://www.youtube.com/@PaniYulya"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-sky-200 transition-colors duration-200"
+            aria-label="Youtube"
+          >
+            <Youtube className="w-6 h-6" />
           </Link>
         </div>
       </div>

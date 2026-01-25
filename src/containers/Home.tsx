@@ -1,10 +1,11 @@
 "use client"
 
-import { Header } from '@/components/Header'
-import { Hero } from '@/components/Hero'
+import Header from '@/components/Header'
+import Hero from '@/components/Hero'
 import OrderSection from '@/containers/OrderContainer'
 import MusicTracks from './MusicTracks'
-import Footer from './Footer'
+import About from './About'
+import Footer from '../components/Footer'
 
 export default function HomeContainer() {
   return (
@@ -36,6 +37,7 @@ export default function HomeContainer() {
 
       <OrderSection />
       <MusicTracks />
+      <About />
       <Footer />
     </div>
   )
