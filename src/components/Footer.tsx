@@ -20,7 +20,7 @@ const TikTok = ({ className }: { className?: string }) => (
 
 const Footer = () => {
   return (
-    <footer className="py-12" style={{ backgroundColor: "var(--secondary)" }}>
+    <footer className="py-12 bg-white">
       <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-start">
         {/* Ліва частина */}
         <div className="flex gap-2 mb-4 md:mb-0">

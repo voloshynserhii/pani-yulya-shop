@@ -52,7 +52,7 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="w-full shadow-md fixed top-0 left-0 z-50" style={{ backgroundColor: "var(--secondary)" }}>
+    <header className="w-full shadow-md fixed top-0 left-0 z-50 bg-white">
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-20">
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0 flex items-center justify-center mt-2">
