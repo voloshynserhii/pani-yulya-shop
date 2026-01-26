@@ -41,7 +41,7 @@ const Checkout = () => {
             localStorage.removeItem('cart')
             setCartItems([])
             window.dispatchEvent(new Event("cart-updated"))
-        } else if (status === 'error') {
+        } else if (status === 'error' || status === 'failed') {
             setErrorMessage(`Помилка оплати. Код: ${reason || 'невідомий'}`)
         }
     }, [searchParams])

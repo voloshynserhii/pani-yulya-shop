@@ -33,7 +33,7 @@ export async function POST(req: Request) {
 
     const body = await req.json()
     console.log('WayForPay webhook received:', body)
-    
+
     // 🔐 Signature validation
     const expectedSignature = generateSignature(body)
 
@@ -83,7 +83,9 @@ export async function POST(req: Request) {
       await user.save()
 
       await sendEmails(existingOrder.toObject())
-    } else {
+    } 
+    
+    if (body.transactionStatus === 'Declined' || body.transactionStatus === 'Expired') {
       await Order.updateOne(
         { reference: body.orderReference },
         {
