@@ -12,6 +12,7 @@ const Checkout = () => {
     const searchParams = useSearchParams()
     const router = useRouter()
     const [showSuccess, setShowSuccess] = useState(false)
+    const [showPending, setShowPending] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const [cartItems, setCartItems] = useState<MusicTrack[]>([])
@@ -32,6 +33,11 @@ const Checkout = () => {
 
         if (status === 'success') {
             setShowSuccess(true)
+            localStorage.removeItem('cart')
+            setCartItems([])
+            window.dispatchEvent(new Event("cart-updated"))
+        }  else if (status === 'pending') {
+            setShowPending(true)
             localStorage.removeItem('cart')
             setCartItems([])
             window.dispatchEvent(new Event("cart-updated"))
@@ -184,6 +190,24 @@ const Checkout = () => {
                         <h2 className="text-2xl font-bold mb-2">Помилка</h2>
                         <p className="text-muted-foreground mb-6">{errorMessage}</p>
                         <Button onClick={closeError} className="w-full">Закрити</Button>
+                    </div>
+                </div>
+            )}
+
+            {/* Pending Modal */}
+            {showPending && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+                    <div className="bg-white dark:bg-zinc-900 rounded-2xl p-8 max-w-md w-full text-center shadow-xl relative">
+                        <button onClick={() => setShowPending(false)} className="absolute top-4 right-4 text-zinc-500 hover:text-zinc-900">
+                            <XMarkIcon className="h-6 w-6" />
+                        </button>
+                        <div className="mx-auto w-16 h-16 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center mb-4">
+                            <ExclamationCircleIcon className="h-10 w-10" />
+                        </div>
+                        <h2 className="text-2xl font-bold mb-2">Оплата в обробці</h2>
+                        <p className="text-muted-foreground mb-6">Ваш платіж перевіряється банком. Це може зайняти деякий час. Ми надішлемо вам лист, як тільки оплата пройде.</p>
+
+                        <Button onClick={() => router.push('/')} className="w-full">На головну</Button>
                     </div>
                 </div>
             )}
