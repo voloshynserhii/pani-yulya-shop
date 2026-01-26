@@ -68,8 +68,6 @@ export async function POST(req: Request) {
 
     // 💳 Process transaction
     if (body.transactionStatus === 'Approved') {
-      await sendEmails(existingOrder.toObject())
-      
       await Order.updateOne(
         { reference: body.orderReference },
         {
@@ -83,6 +81,8 @@ export async function POST(req: Request) {
 
       user.orders.push(existingOrder._id)
       await user.save()
+
+      await sendEmails(existingOrder)
     } 
     
     if (body.transactionStatus === 'Declined' || body.transactionStatus === 'Expired') {
