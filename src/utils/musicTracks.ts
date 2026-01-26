@@ -1,9 +1,4 @@
-interface MusicTrack {
-  trackId: string;
-  title: string;
-  coverSrc: string;
-  price?: number;
-}
+import { MusicTrack } from '@/types';
 
 export const tracks: MusicTrack[] = [
   {
