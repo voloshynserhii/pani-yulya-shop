@@ -13,7 +13,7 @@ const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function sendEmails(order: OrderType) {
   const { productData, contacts, productType } = order
-  const { childName, childNameCute, age, birthday } = productData || {}
+  const { childName, childNameCute, age, birthday, trackIds = [] } = productData || {}
   const { telegram, email } = contacts || {}
 
   let itemName = 'музикальних треків'
@@ -31,7 +31,13 @@ export async function sendEmails(order: OrderType) {
       html: `
         <h1>Нове замовлення!</h1>
         ${productType === 'music_track'
-          ? `<p><strong>Куплено треків:</strong> ${order.productData?.trackIds?.length || 0}</p>`
+          ? `<p><strong>Куплено треків:</strong> ${trackIds?.length || 0}</p>
+            <ul style="padding-left: 16px; margin: 8px 0;">
+              ${trackIds.map((track: string) => 
+                `<li style="margin-bottom: 6px;">
+                  🎵 ${track}
+                </li>`).join('')}
+            </ul>`
           : `<p><strong>Ім'я дитини:</strong> ${childName}</p>
              <p><strong>Пестлива форма імені:</strong> ${childNameCute}</p>
              <p><strong>Вік:</strong> ${age}</p>
@@ -82,7 +88,7 @@ export async function sendEmails(order: OrderType) {
             </p>
 
             <p>Ви можете увійти в особистий кабінет за посиланням:</p>
-            <a href="${process.env.NEXT_PUBLIC_APP_URL}/login">Увійти в кабінет</a>
+            <a href="https://pani-yulya.kids/account">Увійти в кабінет</a>
 
             <p style="font-size: 16px; line-height: 1.6;">
               Обіймаю,<br />
@@ -126,7 +132,7 @@ export async function sendEmails(order: OrderType) {
               справжнє відчуття свята ✨
             </p>
             <p>Ви можете увійти в особистий кабінет за посиланням:</p>
-            <a href="${process.env.NEXT_PUBLIC_APP_URL}/login">Увійти в кабінет</a>
+            <a href="https://pani-yulya.kids/account">Увійти в кабінет</a>
 
             <p style="font-size: 16px; line-height: 1.6;">
               З теплом,<br />
@@ -229,7 +235,7 @@ export async function createWayForPayInvoice(params: {
     productPrice: params.productPrice,
     productCount: params.productCount,
     serviceUrl: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://pani-yulya.kids'}/api/wayforpay/webhook`,
-/*     returnUrl: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://pani-yulya.kids'}/api/checkout/return`, */
+    /*     returnUrl: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://pani-yulya.kids'}/api/checkout/return`, */
     approvedUrl: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://pani-yulya.kids'}/checkout?status=success`,
     declinedUrl: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://pani-yulya.kids'}/checkout?status=failed`,
   }
@@ -242,7 +248,7 @@ export async function createWayForPayInvoice(params: {
     })
 
     const result = await response.json()
-console.log('WayForPay create invoice response:', result)
+    console.log('WayForPay create invoice response:', result)
     if (result.reasonCode === 1100 && result.invoiceUrl) {
       return { success: true, url: result.invoiceUrl }
     }
