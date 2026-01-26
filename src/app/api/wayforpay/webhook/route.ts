@@ -32,7 +32,8 @@ export async function POST(req: Request) {
     await dbConnect()
 
     const body = await req.json()
-console.log('WayForPay webhook received:', body)
+    console.log('WayForPay webhook received:', body)
+    
     // 🔐 Signature validation
     const expectedSignature = generateSignature(body)
 

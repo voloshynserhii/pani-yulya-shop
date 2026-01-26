@@ -229,8 +229,8 @@ export async function createWayForPayInvoice(params: {
     productCount: params.productCount,
     serviceUrl: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://pani-yulya.kids'}/api/wayforpay/webhook`,
     returnUrl: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://pani-yulya.kids'}/api/checkout/return`,
-    approvedUrl: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://pani-yulya.kids'}/checkout/success`,
-    declinedUrl: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://pani-yulya.kids'}/checkout/failed`,
+/*     approvedUrl: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://pani-yulya.kids'}/checkout/success`,
+    declinedUrl: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://pani-yulya.kids'}/checkout/failed`, */
   }
 
   try {
