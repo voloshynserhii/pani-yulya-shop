@@ -32,7 +32,7 @@ export const tracks: MusicTrack[] = [
     price: 49,
   },
   {
-    trackId: "twaryny",
+    trackId: "tvaryny",
     title: "Що їдять тварини",
     coverSrc: "/images/music/tvaryny.jpeg",
     price: 49,
