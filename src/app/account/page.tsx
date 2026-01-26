@@ -10,6 +10,7 @@ import User from '@/models/User'
 import { signOut } from '@/app/account/actions'
 import { Button } from '@/components/ui'
 import { tracks } from '@/utils/musicTracks'
+import { Order, MusicTrack } from '@/types'
 
 export const metadata = {
   title: 'Особистий кабінет',
@@ -31,13 +32,13 @@ export default async function AccountPage() {
   }
 
   await dbConnect()
-  const user = await User.findOne({ email: session.email })
+  const user = await User.findOne({ email: session.email }).populate('orders').lean()
   
   // Map purchased track IDs to actual track objects
   const purchasedTrackIds = new Set<string>()
-  const videoGreetings: any[] = []
+  const videoGreetings: Order[] = []
 
-  user?.orders?.forEach((order: any) => {
+  user?.orders?.forEach((order: Order) => {
     if (order.productType === 'music_track' && order.productData?.trackIds) {
       order.productData.trackIds.forEach((id: string) => purchasedTrackIds.add(id))
     } else if (order.productType === 'video_greeting') {
@@ -46,8 +47,10 @@ export default async function AccountPage() {
   })
 
   videoGreetings.sort((a, b) => new Date(b.orderDate).getTime() - new Date(a.orderDate).getTime())
-  const uniqueTracks = Array.from(purchasedTrackIds).map(id => tracks.find(t => t.trackId === id)).filter(Boolean)
-
+  const uniqueTracks: MusicTrack[] = Array.from(purchasedTrackIds)
+    .map(id => tracks.find(t => t.trackId === id))
+    .filter((track): track is MusicTrack => Boolean(track))
+    
   return (
     <div className="flex min-h-screen flex-col bg-zinc-50 font-sans" style={{ backgroundColor: "var(--background)" }}>
       <Header />
@@ -69,7 +72,7 @@ export default async function AccountPage() {
             <div className="space-y-6">
               <h2 className="text-2xl font-bold">Мої відеопривітання</h2>
               <div className="grid grid-cols-1 gap-6">
-                {videoGreetings.map((order: any) => (
+                {videoGreetings.map((order: Order) => (
                   <div key={order.reference} className="p-6 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800" style={{ backgroundColor: "var(--secondary)" }}>
                     <div className="flex flex-col md:flex-row justify-between gap-6">
                       <div className="space-y-4 flex-grow">
@@ -88,11 +91,11 @@ export default async function AccountPage() {
                         
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 text-sm">
                           <div>
-                            <p className="text-zinc-500 text-xs uppercase tracking-wider font-medium">Ім'я дитини</p>
+                            <p className="text-zinc-500 text-xs uppercase tracking-wider font-medium">Ім&apos;я дитини</p>
                             <p className="font-medium text-base">{order.productData?.childName}</p>
                           </div>
                           <div>
-                            <p className="text-zinc-500 text-xs uppercase tracking-wider font-medium">Пестливе ім'я</p>
+                            <p className="text-zinc-500 text-xs uppercase tracking-wider font-medium">Пестливе ім&apos;я</p>
                             <p className="font-medium text-base">{order.productData?.childNameCute}</p>
                           </div>
                           <div>
@@ -138,7 +141,7 @@ export default async function AccountPage() {
             <h2 className="text-2xl font-bold">Мої покупки</h2>
             {uniqueTracks.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {uniqueTracks.map((track: any) => (
+                {uniqueTracks.map((track) => (
                   <div key={track.trackId} className="rounded-xl overflow-hidden shadow-sm border border-zinc-200 dark:border-zinc-800" style={{ backgroundColor: "var(--secondary)" }}>
                     <div className="relative aspect-square">
                       <Image src={track.coverSrc} alt={track.title} fill className="object-cover" />

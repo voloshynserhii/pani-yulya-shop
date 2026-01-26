@@ -23,6 +23,7 @@ export async function sendEmails(order: OrderType) {
   }
 
   try {
+    console.log('Sending order emails for:', order)
     const { error } = await resend.emails.send({
       from: 'Pani Yulya <noreply@pani-yulya.kids>',
       to: ['kolodyulya@gmail.com'],
