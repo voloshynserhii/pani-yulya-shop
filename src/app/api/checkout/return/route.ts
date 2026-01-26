@@ -4,7 +4,7 @@ export async function POST(req: NextRequest) {
   const formData = await req.formData()
   const status = formData.get('transactionStatus')
   const reasonCode = formData.get('reasonCode')
-
+console.log('Return URL called with status:', status, 'and reasonCode:', reasonCode, formData)
   if (status === 'Approved') {
     return NextResponse.redirect(new URL('/checkout?status=success', req.url), 303)
   }

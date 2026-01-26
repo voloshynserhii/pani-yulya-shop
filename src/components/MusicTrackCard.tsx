@@ -7,14 +7,7 @@ import { useRouter } from "next/navigation";
 
 import { Card, Button } from "@/components/ui";
 import ProtectedAudioPlayer from "@/components/ProtectedAudioPlayer";
-
-interface MusicTrackCardProps {
-  trackId: string;
-  title: string;
-  coverSrc: string;
-  hasAccess: boolean;
-  price?: number;
-}
+import type { MusicTrack } from '@/types'
 
 export default function MusicTrackCard({
   trackId,
@@ -22,7 +15,7 @@ export default function MusicTrackCard({
   coverSrc,
   hasAccess = false,
   price = 50,
-}: MusicTrackCardProps) {
+}: MusicTrack) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isInCart, setIsInCart] = useState(false);
@@ -30,7 +23,7 @@ export default function MusicTrackCard({
 
   useEffect(() => {
     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-    const isInCart = cart.some((i: MusicTrackCardProps) => i.trackId === trackId);
+    const isInCart = cart.some((i: MusicTrack) => i.trackId === trackId);
 
     if (isInCart) setIsInCart(isInCart);
   }, [trackId]);
@@ -72,7 +65,7 @@ export default function MusicTrackCard({
     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
     const item = { trackId, title, coverSrc, price };
 
-    if (!cart.some((i: MusicTrackCardProps) => i.trackId === trackId)) {
+    if (!cart.some((i: MusicTrack) => i.trackId === trackId)) {
       cart.push(item);
       localStorage.setItem("cart", JSON.stringify(cart));
       setIsInCart(true);

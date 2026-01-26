@@ -10,13 +10,13 @@ export const tracks: MusicTrack[] = [
     trackId: "doremi",
     title: "До Ре Мі",
     coverSrc: "/images/music/doremi.jpeg",
-    price: 49,
+    price: 1,
   },
   {
     trackId: "zabka",
     title: "Жабка",
     coverSrc: "/images/music/zabka.jpeg",
-    price: 49,
+    price: 2,
   },
   {
     trackId: "lito",

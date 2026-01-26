@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { Button, Input, Label } from '@/components/ui'
 import { createWayForPayInvoice, saveOrderToDb } from '@/app/actions'
 import { CheckCircleIcon, XMarkIcon, ExclamationCircleIcon, TrashIcon } from '@heroicons/react/24/outline'
+import type { MusicTrack } from '@/types'
 
 const Checkout = () => {
     const searchParams = useSearchParams()
@@ -13,7 +14,7 @@ const Checkout = () => {
     const [showSuccess, setShowSuccess] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
     const [isLoading, setIsLoading] = useState(false)
-    const [cartItems, setCartItems] = useState<any[]>([])
+    const [cartItems, setCartItems] = useState<MusicTrack[]>([])
     const [email, setEmail] = useState('')
 
     useEffect(() => {
@@ -35,11 +36,7 @@ const Checkout = () => {
             setCartItems([])
             window.dispatchEvent(new Event("cart-updated"))
         } else if (status === 'error') {
-            if (reason === '1118') {
-                setErrorMessage('Помилка підпису (1118). Перевірте секретний ключ в .env файлі.')
-            } else {
-                setErrorMessage(`Помилка оплати. Код: ${reason || 'невідомий'}`)
-            }
+            setErrorMessage(`Помилка оплати. Код: ${reason || 'невідомий'}`)
         }
     }, [searchParams])
 

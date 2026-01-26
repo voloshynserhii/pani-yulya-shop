@@ -7,17 +7,8 @@ import { Button } from "@/components/ui";
 import { Input } from "@/components/ui";
 import { Label } from "@/components/ui";
 import { createWayForPayInvoice } from "@/app/actions";
-import { sendOrder, saveOrderToDb } from "@/app/actions";
-
-type FormData = {
-  childName: string;
-  childNameCute: string;
-  age: number;
-  birthday: string;
-  telegram: string;
-  email: string;
-  notes?: string;
-};
+import { saveOrderToDb } from "@/app/actions";
+import type { FormData } from '@/types'
 
 export default function VideoGreetingForm() {
   const {
@@ -56,8 +47,6 @@ export default function VideoGreetingForm() {
 
       if (result.success && result.url) {
         try {
-          await sendOrder(data);
-
           const { telegram = '', childName, childNameCute, age, birthday } = data;
           const email = data.email.toLowerCase().trim();
 
