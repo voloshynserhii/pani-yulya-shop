@@ -7,6 +7,7 @@ import LoginForm from '@/components/LoginForm'
 import { getSession } from '@/lib/auth'
 import dbConnect from '@/lib/mongodb'
 import User from '@/models/User'
+import '@/models/Order' // Ensure Order model is registered
 import { signOut } from '@/app/account/actions'
 import { Button } from '@/components/ui'
 import { tracks } from '@/utils/musicTracks'

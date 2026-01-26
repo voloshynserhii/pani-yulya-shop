@@ -2,6 +2,7 @@
 
 import { Resend } from 'resend';
 import dbConnect from '@/lib/mongodb';
+import '@/models/Order' // Ensure Order model is registered
 import User from '@/models/User';
 import { login, logout } from '@/lib/auth';
 
