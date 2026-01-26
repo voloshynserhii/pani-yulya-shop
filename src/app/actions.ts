@@ -229,6 +229,8 @@ export async function createWayForPayInvoice(params: {
     productCount: params.productCount,
     serviceUrl: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://pani-yulya.kids'}/api/wayforpay/webhook`,
     returnUrl: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://pani-yulya.kids'}/api/checkout/return`,
+    approvedUrl: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://pani-yulya.kids'}/checkout/success`,
+    declinedUrl: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://pani-yulya.kids'}/checkout/failed`,
   }
 
   try {
@@ -292,7 +294,7 @@ export async function getPurchasedTrackIds() {
 
     const trackIds = new Set<string>()
 
-    user.orders.forEach((order: Order) => {
+    user.orders.forEach((order: OrderType) => {
       if (order.productType === 'music_track' && order.status === 'paid' && order.productData?.trackIds) {
         order.productData.trackIds.forEach((id: string) => trackIds.add(id))
       }
