@@ -1,6 +1,30 @@
 import { MusicTrack } from '@/types';
 
 export const tracks: MusicTrack[] = [
+    {
+    trackId: "traktor",
+    title: "Трактор",
+    coverSrc: "/images/music/traktor.jpeg",
+    price: 69,
+  },
+  {
+    trackId: "shark",
+    title: "5 рибок",
+    coverSrc: "/images/music/shark.jpeg",
+    price: 59,
+  },
+    {
+    trackId: "africa",
+    title: "Африка",
+    coverSrc: "/images/music/africa.jpeg",
+    price: 49,
+  },
+  {
+    trackId: "ukraine",
+    title: "Україна",
+    coverSrc: "/images/music/ukraine.jpeg",
+    price: 59,
+  },
   {
     trackId: "doremi",
     title: "До Ре Мі",
@@ -13,29 +37,29 @@ export const tracks: MusicTrack[] = [
     coverSrc: "/images/music/zabka.jpeg",
     price: 49,
   },
-  {
-    trackId: "lito",
-    title: "Літо",
-    coverSrc: "/images/music/lito.png",
-    price: 1,
-  },
-  {
+    {
     trackId: "buldozer",
     title: "Їде Бульдозер",
     coverSrc: "/images/music/buldozer.jpeg",
-    price: 1,
+    price: 69,
+  },
+  {
+    trackId: "parovoz",
+    title: "Паровозик їде, їде",
+    coverSrc: "/images/music/parovoz.jpeg",
+    price: 49,
   },
   {
     trackId: "cosmos",
     title: "Космос",
     coverSrc: "/images/music/cosmos.jpeg",
-    price: 1,
+    price: 49,
   },
   {
     trackId: "tvaryny",
     title: "Що їдять тварини",
     coverSrc: "/images/music/tvaryny.jpeg",
-    price: 1,
+    price: 59,
   },
   {
     trackId: "dino",
@@ -63,7 +87,7 @@ export const tracks: MusicTrack[] = [
   },
   {
     trackId: "сhemni-slova",
-    title: "Світлофор",
+    title: "Чемні слова",
     coverSrc: "/images/music/сhemni-slova.jpeg",
     price: 49,
   },
@@ -77,12 +101,6 @@ export const tracks: MusicTrack[] = [
     trackId: "emotions",
     title: "Емоції",
     coverSrc: "/images/music/emotions.jpeg",
-    price: 49,
-  },
-  {
-    trackId: "africa",
-    title: "Африка",
-    coverSrc: "/images/music/africa.jpeg",
     price: 49,
   },
   {
@@ -122,18 +140,6 @@ export const tracks: MusicTrack[] = [
     price: 49,
   },
   {
-    trackId: "parovoz",
-    title: "Паровозик їде, їде",
-    coverSrc: "/images/music/parovoz.jpeg",
-    price: 49,
-  },
-  {
-    trackId: "shark",
-    title: "Акула",
-    coverSrc: "/images/music/shark.jpeg",
-    price: 49,
-  },
-  {
     trackId: "monkeys",
     title: "10 Мавпеняток",
     coverSrc: "/images/music/monkeys.jpeg",
@@ -152,27 +158,21 @@ export const tracks: MusicTrack[] = [
     price: 49,
   },
   {
-    trackId: "ukraine",
-    title: "Україна",
-    coverSrc: "/images/music/ukraine.jpeg",
-    price: 49,
-  },
-  {
     trackId: "potyag",
     title: "Їде Потяг",
     coverSrc: "/images/music/potyag.jpeg",
     price: 49,
   },
   {
-    trackId: "traktor",
-    title: "Трактор",
-    coverSrc: "/images/music/traktor.jpeg",
-    price: 49,
-  },
-  {
     trackId: "vesela-pisenka",
     title: "Весела Пісенька",
     coverSrc: "/images/music/vesela-pisenka.jpeg",
-    price: 29,
+    price: 49,
+  },
+  {
+    trackId: "lito",
+    title: "Літо",
+    coverSrc: "/images/music/lito.png",
+    price: 49,
   },
 ];

@@ -223,9 +223,9 @@ const Checkout = () => {
                             <CheckCircleIcon className="h-10 w-10" />
                         </div>
                         <h2 className="text-2xl font-bold mb-2">Оплата успішна!</h2>
-                        <p className="text-muted-foreground mb-6">Дякуємо за покупку. Ваші файли вже доступні для завантаження в розділі "Мої пісні".</p>
+                        <p className="text-muted-foreground mb-6">Дякуємо за покупку!</p>
 
-                        <Button onClick={() => router.push('/my-songs')} className="w-full">Перейти до пісень</Button>
+                        <Button onClick={() => router.push('/account')} className="w-full">Перейти до облікового запису</Button>
                     </div>
                 </div>
             )}
