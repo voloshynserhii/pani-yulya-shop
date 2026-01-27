@@ -7,14 +7,14 @@ export const metadata = {
 
 export default function TermsPage() {
   return (
-    <div className="flex min-h-screen flex-col bg-zinc-50 font-sans dark:bg-black">
+    <div className="flex min-h-screen flex-col bg-zinc-50 font-sans">
       <Header />
       <main className="flex-grow">
         <section className="py-24 px-6 pt-32">
           <div className="max-w-4xl mx-auto space-y-8">
             <h1 className="text-3xl font-bold">Правила та умови (Terms and Conditions)</h1>
             
-            <div className="space-y-4 text-zinc-700 dark:text-zinc-300">
+            <div className="space-y-4 text-zinc-700">
               <h2 className="text-xl font-semibold">1. Загальні положення</h2>
               <p>
                 Ці Правила та умови регулюють використання сайту та замовлення послуг/товарів (персональні відеопривітання, аудіофайли) через наш інтернет-магазин.

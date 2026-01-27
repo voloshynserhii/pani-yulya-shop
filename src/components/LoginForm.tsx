@@ -31,7 +31,7 @@ export default function LoginForm() {
 
   if (step === 'email') {
     return (
-      <div className="max-w-md mx-auto bg-white dark:bg-zinc-900 p-8 rounded-2xl shadow-sm border border-zinc-200 dark:border-zinc-800">
+      <div className="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-sm border border-zinc-200">
         <h2 className="text-2xl font-bold mb-6 text-center">Вхід в особистий кабінет</h2>
         <form action={formAction} className="space-y-4">
           <div className="space-y-2">
@@ -46,7 +46,7 @@ export default function LoginForm() {
   }
 
   return (
-    <div className="max-w-md mx-auto bg-white dark:bg-zinc-900 p-8 rounded-2xl shadow-sm border border-zinc-200 dark:border-zinc-800">
+    <div className="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-sm border border-zinc-200">
       <h2 className="text-2xl font-bold mb-6 text-center">Введіть код</h2>
       <p className="text-center text-muted-foreground mb-6">Ми відправили код на {email}</p>
       <form action={verifyAction} className="space-y-4">

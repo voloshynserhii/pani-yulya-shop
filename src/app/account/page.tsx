@@ -22,7 +22,7 @@ export default async function AccountPage() {
 
   if (!session) {
     return (
-      <div className="flex min-h-screen flex-col bg-zinc-50 font-sans dark:bg-black">
+      <div className="flex min-h-screen flex-col bg-zinc-50 font-sans">
         <Header />
         <main className="flex-grow flex items-center justify-center px-6 py-24 pt-32">
           <LoginForm />
@@ -64,9 +64,9 @@ export default async function AccountPage() {
             </form>
           </div>
 
-          <div className="p-6 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800" style={{ backgroundColor: "var(--secondary)" }}>
+          <div className="p-6 rounded-xl shadow-sm border border-zinc-200" style={{ backgroundColor: "var(--secondary)" }}>
             <h2 className="text-xl font-semibold mb-4">Мої дані</h2>
-            <p className="text-zinc-600 dark:text-zinc-400">Email: <span className="text-zinc-900 dark:text-zinc-100 font-medium">{user?.email}</span></p>
+            <p className="text-zinc-600">Email: <span className="text-zinc-900 font-medium">{user?.email}</span></p>
           </div>
 
           {videoGreetings.length > 0 && (
@@ -74,10 +74,10 @@ export default async function AccountPage() {
               <h2 className="text-2xl font-bold">Мої відеопривітання</h2>
               <div className="grid grid-cols-1 gap-6">
                 {videoGreetings.map((order: Order) => (
-                  <div key={order.reference} className="p-6 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800" style={{ backgroundColor: "var(--secondary)" }}>
+                  <div key={order.reference} className="p-6 rounded-xl shadow-sm border border-zinc-200" style={{ backgroundColor: "var(--secondary)" }}>
                     <div className="flex flex-col md:flex-row justify-between gap-6">
                       <div className="space-y-4 flex-grow">
-                        <div className="border-b border-zinc-100 dark:border-zinc-800 pb-4">
+                        <div className="border-b border-zinc-100 pb-4">
                           <h3 className="text-sm font-semibold">Замовлення #{order.reference}</h3>
                           <p className="text-sm text-zinc-500">
                             {new Date(order.orderDate).toLocaleDateString('uk-UA', {
@@ -143,7 +143,7 @@ export default async function AccountPage() {
             {uniqueTracks.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {uniqueTracks.map((track) => (
-                  <div key={track.trackId} className="rounded-xl overflow-hidden shadow-sm border border-zinc-200 dark:border-zinc-800" style={{ backgroundColor: "var(--secondary)" }}>
+                  <div key={track.trackId} className="rounded-xl overflow-hidden shadow-sm border border-zinc-200" style={{ backgroundColor: "var(--secondary)" }}>
                     <div className="relative aspect-square">
                       <Image src={track.coverSrc} alt={track.title} fill className="object-cover" />
                     </div>
@@ -154,7 +154,7 @@ export default async function AccountPage() {
                         href={`/api/audio/download/${track.trackId}.mp3`}
                         download
                         style={{ backgroundColor: "var(--accent)" }}
-                        className="flex items-center justify-center w-full mt-3 py-2 text-sm font-medium text-zinc-700 rounded-lg hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700 transition-colors"
+                        className="flex items-center justify-center w-full mt-3 py-2 text-sm font-medium text-zinc-700 rounded-lg hover:bg-zinc-200 transition-colors"
                       >
                         <Download className="w-4 h-4 mr-2" />
                         Завантажити
@@ -164,7 +164,7 @@ export default async function AccountPage() {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-12 bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200" style={{ backgroundColor: "var(--secondary)" }}>
+              <div className="text-center py-12 bg-white rounded-xl border border-zinc-200" style={{ backgroundColor: "var(--secondary)" }}>
                 <p className="text-zinc-500">У вас поки немає придбаних треків</p>
                 <Button className="mt-4">
                   <Link href="/my-songs">Перейти до каталогу</Link>

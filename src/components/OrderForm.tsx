@@ -39,10 +39,10 @@ export default function VideoGreetingForm() {
         merchantDomainName,
         orderReference,
         orderDate,
-        amount: 1000,
+        amount: 1,
         productName,
         productCount: [1],
-        productPrice: [1000],
+        productPrice: [1],
       });
 
       if (result.success && result.url) {
@@ -52,7 +52,7 @@ export default function VideoGreetingForm() {
 
           const order = {
             reference: orderReference,
-            amount: 1000,
+            amount: 1,
             currency: 'UAH',
             productType: 'video_greeting',
             productData: { childName, childNameCute, age, birthday },

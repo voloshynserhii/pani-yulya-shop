@@ -124,7 +124,7 @@ const Checkout = () => {
                         )}
 
                         {cartItems.map((track) => (
-                            <div key={track.trackId} className="flex items-center gap-4 p-4 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800" style={{ backgroundColor: "var(--secondary)" }}>
+                            <div key={track.trackId} className="flex items-center gap-4 p-4 rounded-xl shadow-sm border border-zinc-200" style={{ backgroundColor: "var(--secondary)" }}>
                                 <div className="relative w-16 h-16 flex-shrink-0">
                                     <Image src={track.coverSrc} alt={track.title} fill className="object-cover rounded-md" />
                                 </div>
@@ -142,7 +142,7 @@ const Checkout = () => {
 
                     {/* Summary */}
                     <div className="lg:col-span-1">
-                        <div className="bg-white dark:bg-zinc-900 p-6 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800 sticky top-24" style={{ backgroundColor: "var(--secondary)" }}>
+                        <div className="bg-white p-6 rounded-xl shadow-sm border border-zinc-200 sticky top-24" style={{ backgroundColor: "var(--secondary)" }}>
                             <h2 className="text-xl font-semibold mb-4">Разом</h2>
 
                             <div className="space-y-2 mb-4">
@@ -180,7 +180,7 @@ const Checkout = () => {
             {/* Error Modal */}
             {errorMessage && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-                    <div className="bg-white dark:bg-zinc-900 rounded-2xl p-8 max-w-md w-full text-center shadow-xl relative">
+                    <div className="bg-white rounded-2xl p-8 max-w-md w-full text-center shadow-xl relative">
                         <button onClick={closeError} className="absolute top-4 right-4 text-zinc-500 hover:text-zinc-900">
                             <XMarkIcon className="h-6 w-6" />
                         </button>
@@ -197,7 +197,7 @@ const Checkout = () => {
             {/* Pending Modal */}
             {showPending && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-                    <div className="bg-white dark:bg-zinc-900 rounded-2xl p-8 max-w-md w-full text-center shadow-xl relative">
+                    <div className="bg-white rounded-2xl p-8 max-w-md w-full text-center shadow-xl relative">
                         <button onClick={() => setShowPending(false)} className="absolute top-4 right-4 text-zinc-500 hover:text-zinc-900">
                             <XMarkIcon className="h-6 w-6" />
                         </button>
@@ -215,7 +215,7 @@ const Checkout = () => {
             {/* Success Modal */}
             {showSuccess && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-                    <div className="bg-white dark:bg-zinc-900 rounded-2xl p-8 max-w-md w-full text-center shadow-xl relative">
+                    <div className="bg-white rounded-2xl p-8 max-w-md w-full text-center shadow-xl relative">
                         <button onClick={() => setShowSuccess(false)} className="absolute top-4 right-4 text-zinc-500 hover:text-zinc-900">
                             <XMarkIcon className="h-6 w-6" />
                         </button>
