@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const OrderSchema = new mongoose.Schema(
   {
-    reference: { type: String, required: true, unique: true },
+    reference: { type: String, required: true },
     amount: { type: Number, required: true, min: 0 },
     currency: { type: String, enum: ['UAH'], default: 'UAH' },
     status: { type: String, enum: ['pending', 'paid', 'failed'], default: 'pending' },
