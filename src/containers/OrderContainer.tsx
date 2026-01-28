@@ -26,6 +26,7 @@ export default function OrderSection() {
                   width={400}
                   height={500}
                   className="h-auto object-cover rounded-lg"
+                  loading="lazy"
                 />
               </div>
             </div>
@@ -54,6 +55,7 @@ export default function OrderSection() {
               width={400}
               height={500}
               className="h-auto object-cover rounded-lg"
+              loading="lazy"
             />
           </div>
         </div>

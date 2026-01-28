@@ -63,6 +63,7 @@ const Header = () => {
                 width={150}
                 height={10}
                 className="h-auto w-auto cursor-pointer"
+                loading="lazy"
               />
             </Link>
           </div>

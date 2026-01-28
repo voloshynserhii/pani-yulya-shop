@@ -13,6 +13,7 @@ export default function About() {
                             height={1300}
                             className="object-cover"
                             priority
+                            loading="lazy"
                         />
                     </div>
 

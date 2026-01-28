@@ -90,6 +90,7 @@ export default function MusicTrackCard({
           alt={title}
           fill
           className="object-cover"
+          loading="lazy"
         />
 
         {/* Overlay */}

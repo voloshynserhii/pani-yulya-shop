@@ -31,6 +31,8 @@ const Hero = ({
         width={600}
         height={500}
         className="w-full h-auto object-cover rounded-lg"
+        loading="lazy"
+        priority
       />
     </div>
   );

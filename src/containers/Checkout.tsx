@@ -126,7 +126,7 @@ const Checkout = () => {
                         {cartItems.map((track) => (
                             <div key={track.trackId} className="flex items-center gap-4 p-4 rounded-xl shadow-sm border border-zinc-200" style={{ backgroundColor: "var(--secondary)" }}>
                                 <div className="relative w-16 h-16 flex-shrink-0">
-                                    <Image src={track.coverSrc} alt={track.title} fill className="object-cover rounded-md" />
+                                    <Image src={track.coverSrc} alt={track.title} fill className="object-cover rounded-md" loading="lazy" />
                                 </div>
                                 <div className="flex-grow">
                                     <h3 className="font-medium">{track.title}</h3>

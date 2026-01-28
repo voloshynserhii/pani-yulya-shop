@@ -89,6 +89,7 @@ export default function UserPage() {
                             width={80}
                             height={80}
                             className="object-cover rounded mr-4"
+                            loading="lazy"
                           />
                         )}
                         <div className="flex-1">

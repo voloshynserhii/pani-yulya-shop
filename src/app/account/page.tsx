@@ -146,7 +146,7 @@ export default async function AccountPage() {
                 {uniqueTracks.map((track) => (
                   <div key={track.trackId} className="rounded-xl overflow-hidden shadow-sm border border-zinc-200" style={{ backgroundColor: "var(--secondary)" }}>
                     <div className="relative aspect-square">
-                      <Image src={track.coverSrc} alt={track.title} fill className="object-cover" />
+                      <Image src={track.coverSrc} alt={track.title} fill className="object-cover" loading="lazy" />
                     </div>
                     <div className="p-4">
                       <h3 className="font-medium mb-2">{track.title}</h3>
