@@ -3,7 +3,8 @@ import OrderSection from '@/containers/OrderContainer'
 import Footer from '@/components/Footer'
 
 export const metadata = {
-  title: 'Відео',
+  title: 'Замовити відеопривітання — Пані Юля Kids',
+  description: 'Замовляйте персональні відеопривітання для своєї дитини.'
 }
 
 export default function VideoPage() {

@@ -127,6 +127,7 @@ export default function VideoGreetingForm() {
         >
           <Input
             type="date"
+            className="w-full min-w-0"
             {...register("birthday", {
               required: "Вкажіть дату народження",
             })}
@@ -158,17 +159,13 @@ export default function VideoGreetingForm() {
         </Field>
       </div>
 
-      {/* Notes */}
-      {/*       <Field label="Побажання або важливі деталі">
-        <Textarea
-          placeholder="Напишіть, якщо є особливі побажання"
-          {...register("notes")}
-        />
-      </Field> */}
-
       {/* Footer */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-2">
-        <div className="text-lg font-medium">Вартість: 1000 грн</div>
+        <div className="flex flex-col">
+          <div className="text-lg font-medium">Вартість: 1000 грн</div>
+          <div className="text-xs text-muted-foreground font-medium">*Подбайте про подарунок заздалегідь. Створення привітання займає до двох тижнів.</div>
+        </div>
+
         <Button size="lg" type="submit" disabled={isSubmitting}>
           {isSubmitting ? "Надсилаємо..." : "Замовити"}
         </Button>

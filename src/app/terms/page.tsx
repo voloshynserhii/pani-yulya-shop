@@ -3,6 +3,7 @@ import Footer from '@/components/Footer'
 
 export const metadata = {
   title: 'Правила та умови',
+  description: 'Ознайомтеся з нашими правилами та умовами використання послуг і продуктів.'
 }
 
 export default function TermsPage() {

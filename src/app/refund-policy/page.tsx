@@ -3,6 +3,7 @@ import Footer from '@/components/Footer'
 
 export const metadata = {
   title: 'Політика повернення',
+  description: 'Дізнайтеся про нашу політику повернення коштів для цифрових товарів та послуг.'
 }
 
 export default function RefundPolicyPage() {

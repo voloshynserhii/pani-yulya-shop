@@ -3,7 +3,8 @@ import MusicTracksSection from '@/containers/MusicTracks'
 import Footer from '@/components/Footer'
 
 export const metadata = {
-  title: 'Мої пісні',
+  title: 'Пісні Пані Юлі — Слухати та Завантажити',
+  description: 'Переглядайте та слухайте ваші улюблені музичні треки.'
 }
 
 export default function MySongsPage() {

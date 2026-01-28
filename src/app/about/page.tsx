@@ -3,7 +3,8 @@ import Footer from '@/components/Footer'
 import About from '@/containers/About'
 
 export const metadata = {
-  title: 'Про мене',
+  title: 'Про Пані Юлю — Історія та Місія',
+  description: 'Дізнайтеся більше про мене, мою історію та місію створення цього сайту.'
 }
 
 export default function AboutPage() {

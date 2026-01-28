@@ -15,6 +15,7 @@ import { Order, MusicTrack } from '@/types'
 
 export const metadata = {
   title: 'Особистий кабінет',
+  description: 'Переглядайте ваші замовлення та керуйте особистими даними в особистому кабінеті.'
 }
 
 export default async function AccountPage() {

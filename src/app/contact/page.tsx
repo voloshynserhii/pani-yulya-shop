@@ -2,7 +2,8 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 
 export const metadata = {
-  title: 'Контакти',
+  title: 'Контакти — Пані Юля Kids',
+  description: 'Зв\'яжіться зі мною або знайдіть мої реквізити для співпраці.'
 }
 
 export default function ContactPage() {
