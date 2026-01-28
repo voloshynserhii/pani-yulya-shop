@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Geist, Geist_Mono, Nunito } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next"
 import "./globals.css";
 
 const geistSans = Geist({
@@ -62,6 +63,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${nunito.variable} antialiased pt-16`}
       >
         {children}
+        <Analytics />
       </body>
       <Script id="clarity-script" strategy="afterInteractive">
         {`
