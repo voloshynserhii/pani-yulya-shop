@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Geist, Geist_Mono, Nunito } from "next/font/google";
 import "./globals.css";
 
@@ -62,6 +63,29 @@ export default function RootLayout({
       >
         {children}
       </body>
+      <Script id="clarity-script" strategy="afterInteractive">
+        {`
+          (function(c,l,a,r,i,t,y){
+            c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/XXXX";
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", "XXXX");
+        `}
+      </Script>
+      <Script
+        id="schema-org"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "Pani Yulya Kids",
+            url: "https://pani-yulya.kids",
+            logo: "https://pani-yulya.kids/images/logo.png",
+            description: "Розвиваючі відео, руханки та пісні для дітей українською мовою.",
+          }),
+        }}
+      />
     </html>
   );
 }

@@ -6,11 +6,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { TrashIcon } from "@heroicons/react/24/outline";
 
-export const metadata = {
-  title: 'Мій кошик',
-  description: 'Переглядайте та керуйте товарами у вашому кошику перед оформленням замовлення.'
-}
-
 interface BasketItem {
   id: string;
   name: string;
