@@ -27,10 +27,10 @@ const Footer = () => {
           <p className="text-sm">&copy; {new Date().getFullYear()}</p>
           <Link
             target="_blank"
-            href="/about"
+            href="https://vosquerylab.vercel.app/"
             className="text-sky-600 hover:text-sky-200 font-bold transition-colors duration-200"
           >
-            <p className="text-sm">Vosquery Studio</p>
+            <p className="text-sm">Vo$Query Lab</p>
           </Link>
           <p className="text-sm">All rights reserved.</p>
         </div>
