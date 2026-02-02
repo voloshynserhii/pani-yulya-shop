@@ -27,6 +27,7 @@ const Footer = () => {
           <p className="text-sm">&copy; {new Date().getFullYear()}</p>
           <Link
             target="_blank"
+            rel="noopener noreferrer"
             href="https://vosquerylab.vercel.app/"
             className="text-sky-600 hover:text-sky-200 font-bold transition-colors duration-200"
           >
