@@ -13,7 +13,7 @@ export default function HomeContainer() {
       <Header />
       <Hero
         imageSrc="/images/hero_image.jpeg"
-        imageAlt="Hero Image"
+        imageAlt="Pani Yulya Kids"
         title={
           <>
             Друзі, привіт!
@@ -30,7 +30,7 @@ export default function HomeContainer() {
             Тут все створено з турботою і теплом.
           </>
         }
-        buttonText="Дізнатися більше"
+        buttonText="Більше про Пані Юлю"
         buttonLink="/about"
         imagePosition="left"
       />

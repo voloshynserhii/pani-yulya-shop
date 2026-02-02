@@ -12,12 +12,11 @@ export default function About() {
                             width={1300}
                             height={1300}
                             className="object-cover"
-                            priority
                             loading="lazy"
                         />
                     </div>
 
-                    <h1 className="text-3xl font-bold mb-6">Привіт! Я — Юля, і мій шлях до створення дитячого контенту почався з материнства.</h1>
+                    <h2 className="text-3xl font-bold mb-6">Привіт! Я — Юля, і мій шлях до створення дитячого контенту почався з материнства.</h2>
 
                     <div className="space-y-6 text-lg text-zinc-700 leading-relaxed">
                         <p>

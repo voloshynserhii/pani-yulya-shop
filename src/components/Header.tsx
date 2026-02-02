@@ -59,11 +59,11 @@ const Header = () => {
             <Link href="/">
               <Image
                 src="/images/logo.png"
-                alt="Pani Yulya Shop"
+                alt="Pani Yulya Kids"
                 width={150}
                 height={10}
                 className="h-auto w-auto cursor-pointer"
-                loading="lazy"
+                priority
               />
             </Link>
           </div>
@@ -77,10 +77,10 @@ const Header = () => {
           </nav>
 
           <div className="hidden md:flex items-center gap-4 z-10">
-            <Link href='/account' className="font-bold">
+            <Link href='/account' className="font-bold" aria-label="Особистий кабінет">
               <UserIcon className="h-6 w-6 hover:text-sky-300" />
             </Link>
-            <Link href='/checkout' className="font-bold relative">
+            <Link href='/checkout' className="font-bold relative" aria-label="Кошик">
               <ShoppingCartIcon className="h-6 w-6 hover:text-sky-300" />
               {cartCount > 0 && (
                 <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
@@ -92,11 +92,11 @@ const Header = () => {
 
           <div className="flex md:hidden gap-2 items-center">
             <div className="flex md:hidden items-center gap-3 z-10">
-              <Link href='/account' className="font-bold">
+              <Link href='/account' className="font-bold" aria-label="Особистий кабінет">
                 <UserIcon className="h-6 w-6" />
               </Link>
 
-              <Link href='/checkout' className="font-bold relative">
+              <Link href='/checkout' className="font-bold relative" aria-label="Кошик">
                 <ShoppingCartIcon className="h-6 w-6" />
                 {cartCount > 0 && (
                   <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">

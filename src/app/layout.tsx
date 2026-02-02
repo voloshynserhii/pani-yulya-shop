@@ -84,7 +84,7 @@ export default function RootLayout({
             name: "Pani Yulya Kids",
             url: "https://pani-yulya.kids",
             logo: "https://pani-yulya.kids/images/logo.png",
-            description: "Пані Юля Kids — Улюблена музика для дітей та персональні відео привітання",
+            description: "Пані Юля Kids — Музика для дітей та відео привітання",
           }),
         }}
       />

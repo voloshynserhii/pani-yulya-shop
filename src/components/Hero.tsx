@@ -12,6 +12,7 @@ interface HeroProps {
   buttonText?: string;
   buttonLink?: string;
   imagePosition?: "left" | "right";
+  headingLevel?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 }
 
 const Hero = ({
@@ -22,7 +23,10 @@ const Hero = ({
   buttonText,
   buttonLink,
   imagePosition = "left",
+  headingLevel = "h1",
 }: HeroProps) => {
+  const HeadingTag = headingLevel;
+
   const imageContent = (
     <div className="w-full md:w-1/2 flex items-center justify-center">
       <Image
@@ -32,16 +36,16 @@ const Hero = ({
         height={500}
         className="w-full h-auto object-cover rounded-lg"
         loading="lazy"
-        priority
+
       />
     </div>
   );
 
   const textContent = (
     <div className="w-full md:w-1/2 flex flex-col justify-center md:px-12">
-      <h1 className="text-5xl lg:text-7xl font-bold mb-10 lg:mb-15 mt-10 text-center md:text-left whitespace-pre-line" style={{ color: "var(--foreground)" }}>
+      <HeadingTag className="text-5xl lg:text-7xl font-bold mb-10 lg:mb-15 mt-10 text-center md:text-left whitespace-pre-line" style={{ color: "var(--foreground)" }}>
         {title}
-      </h1>
+      </HeadingTag>
       <p className="text-xl text-(--foreground) mb-8 text-center md:text-left leading-relaxed font-semibold">
         {description}
       </p>
