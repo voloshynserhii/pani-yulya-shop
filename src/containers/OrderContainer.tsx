@@ -13,10 +13,11 @@ export default function OrderSection() {
               <span className="text-muted-foreground">до дня народження дитини</span>
             </h2>
 
-            <p className="text-lg text-muted-foreground max-w-xl text-center lg:text-left">
+            <h5 className="text-lg text-muted-foreground max-w-xl text-center lg:text-left">Друзі, привіт! Це я, Пані Юля!</h5>
+            <h6 className="text-lg text-muted-foreground max-w-xl text-center lg:text-left">
               Якщо ваш малюк любить дивитися мій канал,
               уявіть, якою радістю стане персональне відеопривітання саме для нього чи неї 💛
-            </p>
+            </h6>
 
             <div className="relative lg:hidden">
               <div className="flex justify-center">

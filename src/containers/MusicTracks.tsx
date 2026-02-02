@@ -48,6 +48,7 @@ export default function MusicTracksSection() {
             <br />
             🧸 Безпека: Вмикайте пісні зі старого плеєра або колонки, щоб не давати дитині в руки телефон з доступом до YouTube.
           </p>
+          <p className="text-muted-foreground max-w-2xl">Pani Yulya Kids — Музика для дітей та відео привітання</p>
         </header>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
