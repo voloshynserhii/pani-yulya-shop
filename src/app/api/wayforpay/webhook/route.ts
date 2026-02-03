@@ -50,11 +50,10 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Order not found' }, { status: 404 })
     }
 
-    const user = await User.findOne({ email: existingOrder.userEmail })
+    let user = await User.findOne({ email: existingOrder.userEmail })
 
     if (!user) {
-      console.error('User not found:', existingOrder.userEmail)
-      return NextResponse.json({ error: 'User not found' }, { status: 404 })
+      user = await User.create({ email: existingOrder.userEmail })
     }
 
     // If already paid — accept silently (WayForPay retries)

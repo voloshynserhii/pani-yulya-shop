@@ -1,4 +1,5 @@
 import HomeContainer from '@/containers/Home';
+/* import { manualSendEmails } from '@/app/manual-actions' */
 
 export const metadata = {
   title: 'Pani Yulya Kids — Музика для дітей та відео привітання',
@@ -6,5 +7,6 @@ export const metadata = {
 };
 
 export default function Home() {
+  /* manualSendEmails() */ // use only if error happens during payment
   return <HomeContainer />
 }
