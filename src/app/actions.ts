@@ -13,7 +13,7 @@ const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function sendEmails(order: OrderType) {
   const { productData, contacts, productType } = order
-  const { childName, childNameCute, age, birthday, trackIds = [] } = productData || {}
+  const { childName, childNameCute, age, birthday, trackIds = [], imageUrls } = productData || {}
   const { telegram, email } = contacts || {}
 
   let itemName = 'музикальних треків'
@@ -22,12 +22,26 @@ export async function sendEmails(order: OrderType) {
     itemName = 'відеопривітання'
   }
 
+  const attachments: { filename: string; content?: Buffer; path?: string }[] = []
+
+  if (productType === 'video_greeting') {
+    if (imageUrls && Array.isArray(imageUrls)) {
+      imageUrls.forEach((url: string, index: number) => {
+        attachments.push({
+          filename: `photo-${index + 1}.jpg`,
+          path: url,
+        })
+      })
+    }
+  }
+
   try {
     console.log('Sending order emails for:', order)
     const { error } = await resend.emails.send({
       from: 'Pani Yulya <noreply@pani-yulya.kids>',
       to: ['kolodyulya@gmail.com'],
       subject: `Нове замовлення ${itemName}`,
+      attachments,
       html: `
         <h1>Нове замовлення!</h1>
         ${productType === 'music_track'

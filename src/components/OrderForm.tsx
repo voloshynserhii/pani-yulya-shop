@@ -14,8 +14,9 @@ export default function VideoGreetingForm() {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors, isSubmitting },
-  } = useForm<FormData>({
+  } = useForm<FormData & { image1: FileList; image2: FileList; image3: FileList }>({
     defaultValues: {
       childName: "",
       childNameCute: "",
@@ -26,11 +27,45 @@ export default function VideoGreetingForm() {
     },
   });
 
-  const onSubmit = async (data: FormData) => {
+  const image1 = watch('image1');
+  const image2 = watch('image2');
+
+  const onSubmit = async (data: FormData & { image1: FileList; image2: FileList; image3: FileList }) => {
     if (!data.childName || !data.age || !data.birthday || !data.email) return;
 
+    const orderReference = `ORDER_VIDEO_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
+
+    const imageUrls: string[] = [];
+
+    const uploadImage = async (fileList: FileList) => {
+      if (fileList && fileList.length > 0) {
+        const file = fileList[0];
+        const formData = new FormData();
+        formData.append('file', file);
+        const response = await fetch('/api/upload', {
+          method: 'POST',
+          body: formData,
+        });
+        if (response.ok) {
+          const blob = await response.json();
+          return blob.url;
+        }
+      }
+      return null;
+    };
+
     try {
-      const orderReference = `ORDER_VIDEO_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
+      const url1 = await uploadImage(data.image1);
+      if (url1) imageUrls.push(url1);
+      const url2 = await uploadImage(data.image2);
+      if (url2) imageUrls.push(url2);
+      const url3 = await uploadImage(data.image3);
+      if (url3) imageUrls.push(url3);
+    } catch (e) {
+      console.error('Failed to upload file', e)
+    }
+
+    try {
       const orderDate = Math.floor(Date.now() / 1000);
       const merchantDomainName = window.location.hostname;
       const productName = [`Відеопривітання для ${data.childName} з нагоди ${data.age} років.`];
@@ -55,7 +90,7 @@ export default function VideoGreetingForm() {
             amount: 1000,
             currency: 'UAH',
             productType: 'video_greeting',
-            productData: { childName, childNameCute, age, birthday },
+            productData: { childName, childNameCute, age, birthday, imageUrls },
             contacts: { email, telegram },
             orderDate: new Date(),
           };
@@ -142,6 +177,7 @@ export default function VideoGreetingForm() {
             {...register("telegram")}
           />
         </Field>
+
         <Field
           label="Ваш email"
           error={errors.email?.message}
@@ -157,6 +193,22 @@ export default function VideoGreetingForm() {
             })}
           />
         </Field>
+
+        <Field label="Фото дитини 1">
+          <Input type="file" accept="image/*" {...register('image1')} />
+        </Field>
+
+        {image1 && image1.length > 0 && (
+          <Field label="Фото дитини 2">
+            <Input type="file" accept="image/*" {...register('image2')} />
+          </Field>
+        )}
+
+        {image2 && image2.length > 0 && (
+          <Field label="Фото дитини 3">
+            <Input type="file" accept="image/*" {...register('image3')} />
+          </Field>
+        )}
       </div>
 
       {/* Footer */}

@@ -4,7 +4,7 @@ interface Order {
   currency: string
   status?: string
   productType?: string
-  productData: { childName?: string, childNameCute?: string, age?: number, birthday?: string, trackIds?: string[] },
+  productData: { childName?: string, childNameCute?: string, age?: number, birthday?: string, trackIds?: string[], imageUrls?: string },
   contacts: { email: string, telegram?: string },
   orderDate: Date,
   userEmail?: string,

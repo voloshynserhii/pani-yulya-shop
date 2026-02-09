@@ -7,6 +7,7 @@ export const metadata = {
 };
 
 export default function Home() {
-  /* manualSendEmails() */ // use only if error happens during payment
+  // use only if error happens during payment
+  /* manualSendEmails('698a3208593a3b83d6d13d84') */
   return <HomeContainer />
 }
