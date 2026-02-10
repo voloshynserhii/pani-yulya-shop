@@ -67,11 +67,9 @@ export default function ToyCard({ toy }: { toy: Toy }) {
         <div className="flex items-center justify-between pt-4 border-t border-zinc-100">
           <span className="font-bold text-xl text-zinc-900">{toy.price} грн</span>
           <Button 
-            size="icon" 
             /* onClick={addToCart}  */
             disabled={isInCart} 
-            variant={isInCart ? "secondary" : "default"}
-            className="shrink-0 transition-all rounded-full h-10 w-10"
+            className="w-full sm:w-auto px-5 h-12 text-md rounded-full"
             aria-label={isInCart ? "В кошику" : "Додати в кошик"}
           >
             <ShoppingCart className="h-5 w-5" />
