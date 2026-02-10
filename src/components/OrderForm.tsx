@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { useForm } from "react-hook-form";
+import { Trash2 } from "lucide-react";
 
 import { Button } from "@/components/ui";
 import { Input } from "@/components/ui";
@@ -15,6 +16,7 @@ export default function VideoGreetingForm() {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<FormData & { image1: FileList; image2: FileList; image3: FileList }>({
     defaultValues: {
@@ -29,6 +31,7 @@ export default function VideoGreetingForm() {
 
   const image1 = watch('image1');
   const image2 = watch('image2');
+  const image3 = watch('image3');
 
   const onSubmit = async (data: FormData & { image1: FileList; image2: FileList; image3: FileList }) => {
     if (!data.childName || !data.age || !data.birthday || !data.email) return;
@@ -162,7 +165,7 @@ export default function VideoGreetingForm() {
         >
           <Input
             type="date"
-            className="w-full min-w-0"
+            className="min-w-0 appearance-none"
             {...register("birthday", {
               required: "Вкажіть дату народження",
             })}
@@ -194,19 +197,55 @@ export default function VideoGreetingForm() {
           />
         </Field>
 
-        <Field label="Фото дитини 1">
-          <Input type="file" accept="image/*" {...register('image1')} />
+        <Field label="Фото дитини 1" error={errors.image1?.message}>
+          <div className="flex items-center gap-2">
+            <Input type="file" accept="image/*" {...register('image1')} />
+            {image1 && image1.length > 0 && (
+              <button
+                type="button"
+                onClick={() => setValue('image1', null as any)}
+                className="p-2 text-red-500 hover:text-red-400 transition-colors"
+                title="Видалити фото"
+              >
+                <Trash2 className="h-5 w-5" />
+              </button>
+            )}
+          </div>
         </Field>
 
         {image1 && image1.length > 0 && (
           <Field label="Фото дитини 2">
-            <Input type="file" accept="image/*" {...register('image2')} />
+            <div className="flex items-center gap-2">
+              <Input type="file" accept="image/*" {...register('image2')} />
+              {image2 && image2.length > 0 && (
+                <button
+                  type="button"
+                  onClick={() => setValue('image2', null as any)}
+                  className="p-2 text-red-500 hover:text-red-400 transition-colors"
+                  title="Видалити фото"
+                >
+                  <Trash2 className="h-5 w-5" />
+                </button>
+              )}
+            </div>
           </Field>
         )}
 
         {image2 && image2.length > 0 && (
           <Field label="Фото дитини 3">
-            <Input type="file" accept="image/*" {...register('image3')} />
+            <div className="flex items-center gap-2">
+              <Input type="file" accept="image/*" {...register('image3')} />
+              {image3 && image3.length > 0 && (
+                <button
+                  type="button"
+                  onClick={() => setValue('image3', null as any)}
+                  className="p-2 text-red-500 hover:text-red-400 transition-colors"
+                  title="Видалити фото"
+                >
+                  <Trash2 className="h-5 w-5" />
+                </button>
+              )}
+            </div>
           </Field>
         )}
       </div>
@@ -234,13 +273,15 @@ function Field({
   label,
   error,
   children,
+  className,
 }: {
   label: string;
   error?: string;
   children: React.ReactNode;
+  className?: string;
 }) {
   return (
-    <div className="space-y-2">
+    <div className={`space-y-2 ${className || ''}`}>
       <Label>{label}</Label>
       {children}
       {error && (

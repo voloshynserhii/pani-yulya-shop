@@ -12,17 +12,23 @@ import {
 } from "@/components/ui/carousel";
 
 interface Review {
-  id: string;
+  _id: string;
   name: string;
   text: string;
+  validated: boolean;
 }
+
+const defaultFormData: Partial<Review> = {
+  name: "",
+  text: "",
+};
 
 export default function Reviews() {
   const [reviewsList, setReviewsList] = useState<Review[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [formData, setFormData] = useState({ name: "", text: "" });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [formData, setFormData] = useState<Partial<Review>>(defaultFormData);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const fetchReviews = async () => {
     setIsLoading(true);
@@ -30,7 +36,7 @@ export default function Reviews() {
       const response = await fetch("/api/reviews");
       const result = await response.json();
       if (result.success) {
-        setReviewsList(result.reviews.map((r: any) => ({ ...r, id: r._id })));
+        setReviewsList(result.reviews);
       }
     } catch (error) {
       console.error("Failed to fetch reviews:", error);
@@ -67,7 +73,7 @@ export default function Reviews() {
       if (result.success) {
         await fetchReviews();
         
-        setFormData({ name: "", text: "" });
+        setFormData(defaultFormData);
         setIsModalOpen(false);
         alert("Дякуємо за ваш відгук! Він з'явиться на сайті після перевірки модератором.");
       } else {
@@ -115,13 +121,13 @@ export default function Reviews() {
           >
             <CarouselContent className="-ml-4">
               {reviewsList.map((review) => (
-                <CarouselItem key={review.id} className="pl-4 md:basis-1/2 lg:basis-1/3">
+                <CarouselItem key={review._id} className="pl-4 md:basis-1/2 lg:basis-1/3">
                   <div className="h-full p-1">
                     <Card className="h-full flex flex-col bg-white shadow-sm hover:shadow-md transition-shadow duration-300">
                       <CardContent className="flex flex-col items-center justify-start text-center p-8 flex-grow">
                         <p className="text-lg font-semibold text-zinc-900">{review.name}</p>
                         <blockquote className="text-zinc-700 italic leading-relaxed flex-grow">
-                          "{review.text}"
+                          &quot;{review.text}&quot;
                         </blockquote>
                       </CardContent>
                     </Card>
@@ -139,10 +145,10 @@ export default function Reviews() {
 
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
-          <div className="relative w-full max-w-md rounded-2xl bg-white p-6 shadow-xl animate-in fade-in zoom-in duration-200">
+          <div className="relative w-full max-w-md rounded-2xl p-6 shadow-xl animate-in fade-in zoom-in duration-200" style={{ backgroundColor: "var(--secondary)" }}>
             <button
               onClick={() => setIsModalOpen(false)}
-              className="absolute right-4 top-4 text-zinc-400 hover:text-zinc-900 transition-colors"
+              className="absolute right-4 top-4 text-zinc-400 hover:text-zinc-900 transition-colors cursor-pointer"
             >
               <X className="h-5 w-5" />
             </button>
@@ -151,7 +157,7 @@ export default function Reviews() {
             
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
-                <label htmlFor="name" className="text-sm font-medium text-zinc-700">Ваше ім'я</label>
+                <label htmlFor="name" className="text-sm font-medium text-zinc-700">Ваше ім&apos;я</label>
                 <input
                   id="name"
                   type="text"

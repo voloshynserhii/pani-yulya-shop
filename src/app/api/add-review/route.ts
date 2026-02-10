@@ -15,7 +15,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const newReview = await Review.create({ name, text });
+    const newReview = await Review.create({ name, text, validated: false });
     revalidatePath("/");
     
     return NextResponse.json({ success: true, review: newReview });

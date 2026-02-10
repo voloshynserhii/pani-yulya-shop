@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const ReviewSchema = new mongoose.Schema({
-  name: { type: String, required: true },
+  name: { type: String, required: true, unique: true },
   text: { type: String, required: true },
   validated: { type: Boolean, default: false },
 }, { timestamps: true });
