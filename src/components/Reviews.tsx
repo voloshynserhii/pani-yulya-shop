@@ -25,7 +25,7 @@ export default function Reviews() {
             Що кажуть про Пані Юлю
           </h2>
           <p className="max-w-[900px] text-zinc-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-            Відгуки щасливих батьків та дітей про відеопривітання, пісні та рекомендації.
+            Відгуки батьків та дітей про відеопривітання, пісні та рекомендації.
           </p>
         </div>
         <Carousel
@@ -39,7 +39,7 @@ export default function Reviews() {
           }}
         >
           <CarouselContent className="-ml-4">
-            {reviews.map((review) => (
+ {/*            {reviews.map((review) => (
               <CarouselItem key={review.id} className="pl-4 md:basis-1/2 lg:basis-1/3">
                 <div className="h-full p-1">
                   <Card className="h-full flex flex-col bg-white shadow-sm hover:shadow-md transition-shadow duration-300">
@@ -62,7 +62,7 @@ export default function Reviews() {
                   </Card>
                 </div>
               </CarouselItem>
-            ))}
+            ))} */}
           </CarouselContent>
         </Carousel>
       </div>
