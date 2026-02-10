@@ -18,7 +18,7 @@ export default function Reviews() {
   );
 
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32 bg-zinc-50 border-t border-zinc-200">
+    <section className="w-full py-12 md:py-24 lg:py-32 border-t border-zinc-200" style={{ backgroundColor: "var(--secondary)" }}>
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-zinc-900">
