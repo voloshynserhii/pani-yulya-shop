@@ -15,10 +15,10 @@ export default function ShopPage() {
       <main className="flex-grow pt-32 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto space-y-12">
           <div className="text-center space-y-4">
-            <h1 className="text-4xl font-bold tracking-tight text-zinc-900 sm:text-5xl">
+            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
               Іграшки з відео та рекомендації
             </h1>
-            <p className="text-lg text-zinc-600 max-w-2xl mx-auto">
+            <p className="text-lg max-w-2xl mx-auto">
               Тут ви знайдете іграшки, які з&apos;являлися у відео на каналі Пані Юля, або рекомендовані нею для розвитку та розваг ваших дітей.
             </p>
           </div>

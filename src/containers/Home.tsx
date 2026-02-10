@@ -38,7 +38,7 @@ export default function HomeContainer() {
 
       <OrderSection />
       <MusicTracks />
-{/*       <Reviews /> */}
+      <Reviews />
       <About />
       <Footer />
     </div>
