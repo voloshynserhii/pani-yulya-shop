@@ -9,6 +9,7 @@ const navLinks = [
   { name: "Головна", href: "/" },
   { name: "Відеопривітання", href: "/video" },
   { name: "Мої пісні", href: "/my-songs" },
+  { name: "Іграшки з відео", href: "/shop" },
   { name: "Про мене", href: "/about" },
 ];
 

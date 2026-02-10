@@ -3,6 +3,7 @@
 import Header from '@/components/Header'
 import Hero from '@/components/Hero'
 import OrderSection from '@/containers/OrderContainer'
+import Reviews from '@/components/Reviews'
 import MusicTracks from './MusicTracks'
 import About from './About'
 import Footer from '../components/Footer'
@@ -36,6 +37,7 @@ export default function HomeContainer() {
       />
 
       <OrderSection />
+      <Reviews />
       <MusicTracks />
       <About />
       <Footer />
