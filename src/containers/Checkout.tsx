@@ -8,7 +8,7 @@ import { createWayForPayInvoice, saveOrderToDb } from '@/app/actions'
 import { CheckCircleIcon, XMarkIcon, ExclamationCircleIcon, TrashIcon, MinusIcon, PlusIcon } from '@heroicons/react/24/outline'
 import type { MusicTrack } from '@/types'
 
-interface CartItem extends MusicTrack {
+interface CartItem extends Omit<MusicTrack, 'trackId'> {
     type?: 'toy' | 'music_track'
     toyId?: string
     trackId?: string
@@ -132,7 +132,7 @@ const Checkout = () => {
 
                 const productData: any = {}
                 if (tracks.length > 0) productData.trackIds = tracks.map(t => t.trackId)
-                if (hasToys) productData.toyIds = toys.map(t => ({ id: t.toyId, quantity: t.quantity }))
+                if (hasToys) productData.toyIds = toys.map(t => ({ toyId: t.toyId, quantity: t.quantity || 1 }))
 
                 const contacts: any = { email }
                 if (hasToys) contacts.delivery = deliveryForm
