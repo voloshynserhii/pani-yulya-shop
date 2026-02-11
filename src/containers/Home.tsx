@@ -5,6 +5,7 @@ import Hero from '@/components/Hero'
 import OrderSection from '@/containers/OrderContainer'
 import Reviews from '@/components/Reviews'
 import MusicTracks from './MusicTracks'
+import YoutubeCarousel from '@/components/YoutubeCarousel'
 import About from './About'
 import Footer from '../components/Footer'
 
@@ -35,7 +36,7 @@ export default function HomeContainer() {
         buttonLink="/about"
         imagePosition="left"
       />
-
+      <YoutubeCarousel />
       <OrderSection />
       <MusicTracks />
       <Reviews />
