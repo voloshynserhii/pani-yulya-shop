@@ -24,8 +24,8 @@ export default function ShopPage() {
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {toys.map((toy) => (
-              <ToyCard key={toy.id} toy={toy} />
+            {toys.filter(toy => toy.available !== false).map((toy) => (
+              <ToyCard key={toy._id} toy={toy} />
             ))}
           </div>
         </div>

@@ -8,17 +8,22 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui";
-import { toys } from "@/data/toys";
+import { toys, Toy } from "@/data/toys";
+
+interface CartItem extends Toy {
+    type?: 'toy' | 'music_track'
+    toyId?: string
+}
 
 export default function ToyPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
-  const toy = toys.find((t) => t.id === id);
+  const toy = toys.find((t) => t._id === id);
   const [isInCart, setIsInCart] = useState(false);
 
   useEffect(() => {
     if (toy) {
       const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-      const exists = cart.some((item: any) => item.id === toy.id);
+      const exists = cart.some((item: CartItem) => item.toyId === toy._id);
       setIsInCart(exists);
     }
   }, [toy]);
@@ -31,15 +36,14 @@ export default function ToyPage({ params }: { params: Promise<{ id: string }> })
     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
     
     const item = {
-      trackId: toy.id,
-      id: toy.id,
+      toyId: toy._id,
       title: toy.title,
       coverSrc: toy.imageSrc,
       price: toy.price,
       type: 'toy'
     };
 
-    if (!cart.some((i: any) => i.id === toy.id)) {
+    if (!cart.some((i: CartItem) => i.toyId === toy._id)) {
       cart.push(item);
       localStorage.setItem("cart", JSON.stringify(cart));
       setIsInCart(true);
@@ -79,13 +83,8 @@ export default function ToyPage({ params }: { params: Promise<{ id: string }> })
               {/* Content Section */}
               <div className="p-8 lg:p-12 flex flex-col justify-center">
                 <div className="flex items-center gap-2 mb-4">
-                  <div className="flex items-center gap-1 text-yellow-500 bg-yellow-50 px-3 py-1 rounded-full">
-                    <span className="text-sm">★</span>
-                    <span className="text-sm font-bold text-zinc-700">{toy.rating}</span>
-                  </div>
-                  <span className="text-zinc-400 text-sm">ID: {toy.id}</span>
+                  <span className="text-zinc-400 text-sm">ID: {toy._id}</span>
                 </div>
-
                 <h1 className="text-3xl md:text-4xl font-bold text-zinc-900 mb-6 leading-tight">
                   {toy.title}
                 </h1>
@@ -99,7 +98,7 @@ export default function ToyPage({ params }: { params: Promise<{ id: string }> })
                   
                   <Button 
                     size="lg" 
-                    /* onClick={addToCart}  */
+                    onClick={addToCart} 
                     disabled={isInCart} 
                     className="w-full sm:w-auto px-8 h-14 text-lg rounded-full"
                   >

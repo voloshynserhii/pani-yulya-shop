@@ -3,6 +3,7 @@
 import { Resend } from 'resend'
 import crypto from 'crypto'
 import { cookies } from 'next/headers'
+import { del } from '@vercel/blob'
 import dbConnect from '@/lib/mongodb'
 import User from '@/models/User'
 import Order from '@/models/Order'
@@ -169,6 +170,14 @@ export async function sendEmails(order: OrderType) {
 
     if (errorUser) {
       return { success: false, message: errorUser.message }
+    }
+
+    if (productType === 'video_greeting' && imageUrls && imageUrls.length > 0) {
+      try {
+        await del(imageUrls)
+      } catch (error) {
+        console.error('Error deleting images:', error)
+      }
     }
 
     return { success: true, message: 'Замовлення відправлено!' }

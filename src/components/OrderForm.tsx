@@ -126,7 +126,7 @@ export default function VideoGreetingForm() {
           error={errors.childName?.message}
         >
           <Input
-            placeholder="Введіть імʼя дитини"
+            placeholder="Іван"
             {...register("childName", {
               required: "Вкажіть імʼя дитини",
             })}
@@ -138,7 +138,7 @@ export default function VideoGreetingForm() {
           error={errors.childNameCute?.message}
         >
           <Input
-            placeholder="Введіть пестливу форму імені дитини"
+            placeholder="Іванко"
             {...register("childNameCute", {
               required: "Вкажіть пестливу форму імені",
             })}
@@ -186,7 +186,7 @@ export default function VideoGreetingForm() {
           error={errors.email?.message}
         >
           <Input
-            placeholder="Вкажіть Ваш email"
+            placeholder="some@example.com"
             {...register("email", {
               required: "Email обовʼязковий",
               pattern: {
