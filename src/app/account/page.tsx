@@ -40,7 +40,7 @@ export default async function AccountPage() {
   const purchasedTrackIds = new Set<string>()
   const videoGreetings: Order[] = []
   const physicalOrders: Order[] = []
-console.log(user?.orders) // Debugging line to check the structure of orders
+
   user?.orders?.forEach((order: Order) => {
     if (order.productType === 'music_track' && order.productData?.trackIds) {
       order.productData.trackIds.forEach((id: string) => purchasedTrackIds.add(id))

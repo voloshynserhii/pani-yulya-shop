@@ -5,7 +5,7 @@ interface Order {
   status?: string
   productType?: string
   productData: { childName?: string, childNameCute?: string, age?: number, birthday?: string, trackIds?: string[], toyIds?: string[], imageUrls?: string[] },
-  contacts: { email: string, telegram?: string },
+  contacts: { email: string, telegram?: string, delivery?: { firstName: string, lastName: string, phone: string, city: string, warehouse: string } },
   orderDate: Date,
   userEmail?: string,
 }
