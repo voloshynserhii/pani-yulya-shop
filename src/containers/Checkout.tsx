@@ -230,23 +230,23 @@ const Checkout = () => {
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div className="space-y-2">
                                         <Label>Ім&apos;я</Label>
-                                        <Input value={deliveryForm.firstName} onChange={(e) => setDeliveryForm({...deliveryForm, firstName: e.target.value})} placeholder="Іван" />
+                                        <Input value={deliveryForm.firstName} onChange={(e: any) => setDeliveryForm({...deliveryForm, firstName: e.target.value})} placeholder="Іван" />
                                     </div>
                                     <div className="space-y-2">
                                         <Label>Прізвище</Label>
-                                        <Input value={deliveryForm.lastName} onChange={(e) => setDeliveryForm({...deliveryForm, lastName: e.target.value})} placeholder="Петренко" />
+                                        <Input value={deliveryForm.lastName} onChange={(e: any) => setDeliveryForm({...deliveryForm, lastName: e.target.value})} placeholder="Петренко" />
                                     </div>
                                     <div className="space-y-2">
                                         <Label>Телефон</Label>
-                                        <Input value={deliveryForm.phone} onChange={(e) => setDeliveryForm({...deliveryForm, phone: e.target.value})} placeholder="+380..." />
+                                        <Input value={deliveryForm.phone} onChange={(e: any) => setDeliveryForm({...deliveryForm, phone: e.target.value})} placeholder="+380..." />
                                     </div>
                                     <div className="space-y-2">
                                         <Label>Місто</Label>
-                                        <Input value={deliveryForm.city} onChange={(e) => setDeliveryForm({...deliveryForm, city: e.target.value})} placeholder="Київ" />
+                                        <Input value={deliveryForm.city} onChange={(e: any) => setDeliveryForm({...deliveryForm, city: e.target.value})} placeholder="Київ" />
                                     </div>
                                     <div className="space-y-2 md:col-span-2">
                                         <Label>Відділення / Поштомат</Label>
-                                        <Input value={deliveryForm.warehouse} onChange={(e) => setDeliveryForm({...deliveryForm, warehouse: e.target.value})} placeholder="Відділення №1" />
+                                        <Input value={deliveryForm.warehouse} onChange={(e: any) => setDeliveryForm({...deliveryForm, warehouse: e.target.value})} placeholder="Відділення №1" />
                                     </div>
                                 </div>
                             </div>
