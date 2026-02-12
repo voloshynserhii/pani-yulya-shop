@@ -11,7 +11,7 @@ export default function ContactPage() {
     <div className="flex min-h-screen flex-col bg-zinc-50 font-sans">
       <Header />
       <main className="flex-grow">
-        <section className="py-24 px-6 pt-32">
+        <section className="px-6 py-12 md:py-24">
           <div className="max-w-4xl mx-auto space-y-8">
             <h1 className="text-3xl font-bold">Контактна інформація</h1>
             
