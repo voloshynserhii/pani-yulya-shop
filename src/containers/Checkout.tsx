@@ -189,6 +189,12 @@ const Checkout = () => {
                         ))}
 
                         {hasToys && (
+                            <div className="p-4 rounded-xl border border-zinc-200 text-sm text-muted-foreground" style={{ backgroundColor: "var(--secondary)" }}>
+                                Доставка іграшок здійснюється компанією Нова Пошта в термін від 2 до 7 днів. При замовленні до 9000 грн — доставка за тарифами перевізника, від 9000 грн — безкоштовно.
+                            </div>
+                        )}
+
+                        {hasToys && (
                             <DeliveryForm 
                                 value={deliveryForm} 
                                 onChange={handleDeliveryChange} 
