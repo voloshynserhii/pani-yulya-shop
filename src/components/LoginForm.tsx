@@ -25,7 +25,7 @@ export default function LoginForm() {
   useEffect(() => {
     if (state.step === 'verify') {
       setStep('verify')
-      setEmail(state.email || '')
+      setEmail(state.email|| '')
     }
   }, [state])
 
@@ -36,7 +36,14 @@ export default function LoginForm() {
         <form action={formAction} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
-            <Input id="email" name="email" type="email" placeholder="your@email.com" required />
+            <Input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="your@email.com"
+              required
+              onChange={(e: any) => (e.target.value = e.target.value.toLowerCase().trim())}
+            />
           </div>
           <SubmitButton text="Отримати код" />
           {state.message && !state.success && <p className="text-red-500 text-sm text-center">{state.message}</p>}
