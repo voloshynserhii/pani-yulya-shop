@@ -81,7 +81,7 @@ export async function sendEmails(order: OrderType) {
             </h1>
 
             <p style="font-size: 16px; line-height: 1.6; margin-bottom: 16px;">
-              Мені дуже приємно, що пісеньки <strong>Пані Юлі</strong> стануть частиною ваших
+              Мені дуже приємно, що пісні <strong>Пані Юлі</strong> стануть частиною ваших
               сімейних моментів.
             </p>
 

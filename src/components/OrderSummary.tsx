@@ -28,7 +28,7 @@ export default function OrderSummary({
                 <Input
                     placeholder="email@example.com"
                     value={email}
-                    onChange={(e: any) => onEmailChange(e.target.value)}
+                    onChange={(e: any) => onEmailChange(e.target.value.toLowerCase().trim())}
                 />
             </div>
 

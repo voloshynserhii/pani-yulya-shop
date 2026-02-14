@@ -31,10 +31,16 @@ export default function DeliveryForm({ value, onChange }: DeliveryFormProps) {
                     <Input value={value.phone} onChange={(e: any) => onChange('phone', e.target.value)} placeholder="+380..." />
                 </div>
                 <div className="space-y-2">
+                    <Label>Країна</Label>
+                    <select className="flex h-10 w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-950 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" disabled>
+                        <option>Україна</option>
+                    </select>
+                </div>
+                <div className="space-y-2">
                     <Label>Місто</Label>
                     <Input value={value.city} onChange={(e: any) => onChange('city', e.target.value)} placeholder="Київ" />
                 </div>
-                <div className="space-y-2 md:col-span-2">
+                <div className="space-y-2">
                     <Label>Відділення / Поштомат</Label>
                     <Input value={value.warehouse} onChange={(e: any) => onChange('warehouse', e.target.value)} placeholder="Відділення №1" />
                 </div>
