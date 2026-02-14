@@ -4,7 +4,7 @@ import Image from 'next/image'
 export default function OrderSection() {
 
   return (
-    <section className="w-full py-16" style={{ backgroundColor: "var(--secondary)" }}>
+    <section className="w-full py-16" style={{ backgroundColor: "var(--primary)" }}>
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center px-[30px] sm:px-0">
         <div className="space-y-8 flex flex-col justify-center items-center">
           <div className="space-y-4">

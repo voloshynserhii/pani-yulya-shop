@@ -104,6 +104,7 @@ export default function Reviews() {
             <MessageSquarePlus className="mr-2 h-4 w-4" /> Залишити відгук
           </Button>
         </div>
+
         {isLoading ? (
           <div className="text-center text-zinc-600">
             <p>Завантаження відгуків...</p>
@@ -123,7 +124,7 @@ export default function Reviews() {
               {reviewsList.map((review) => (
                 <CarouselItem key={review._id} className="pl-4 md:basis-1/2 lg:basis-1/3">
                   <div className="h-full p-1">
-                    <Card className="h-full flex flex-col bg-white shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <Card className="h-full flex flex-col shadow-sm hover:shadow-md transition-shadow duration-300" style={{ backgroundColor: "var(--primary)" }}>
                       <CardContent className="flex flex-col items-center justify-start text-center p-8 flex-grow">
                         <p className="text-lg font-semibold text-zinc-900">{review.name}</p>
                         <blockquote className="text-zinc-700 italic leading-relaxed flex-grow">

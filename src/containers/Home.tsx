@@ -6,6 +6,7 @@ import OrderSection from '@/containers/OrderContainer'
 import Reviews from '@/components/Reviews'
 import MusicTracks from './MusicTracks'
 import YoutubeCarousel from '@/components/YoutubeCarousel'
+import ToysCarousel from '@/components/ToysCarousel'
 import About from './About'
 import Footer from '../components/Footer'
 
@@ -38,6 +39,7 @@ export default function HomeContainer() {
       />
       <YoutubeCarousel />
       <OrderSection />
+      <ToysCarousel />
       <MusicTracks />
       <Reviews />
       <About />

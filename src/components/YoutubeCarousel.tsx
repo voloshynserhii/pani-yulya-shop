@@ -70,7 +70,7 @@ export default function YoutubeCarousel() {
   }, [api])
 
   return (
-    <section className="w-full py-16 bg-zinc-50">
+    <section className="w-full py-16 bg-zinc-50" style={{ backgroundColor: "var(--secondary)" }}>
       <div className="max-w-7xl mx-auto px-[30px] sm:px-6 lg:px-8">
         <h2 className="text-3xl md:text-4xl font-semibold text-center mb-10">
           Розважально-навчальні відео для дітей українською
